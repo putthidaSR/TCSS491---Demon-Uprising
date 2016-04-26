@@ -160,18 +160,18 @@ Magician1.prototype.update = function () {
 		console.log("yes");
 	}
 //	if (this.game.space) {
-//		this.change("space");
-//		console.log("yes");
+//	this.change("space");
+//	console.log("yes");
 //	}
-	
+
 	if (this.game.shooting) {
 		//this.shoot = true;
 		this.change("shoot");
 		console.log("shoooot");
 	}
 	//move the character
-	
-	
+
+
 	if (this.up) {
 		if(this.move) {
 			this.yPosition -= 15;
@@ -238,7 +238,7 @@ Magician1.prototype.change = function(dir) {
 	}
 	this.move = true;
 	//this.shoot = true;
-	
+
 }
 
 Magician1.prototype.draw = function (ctx) {
@@ -253,9 +253,72 @@ Magician1.prototype.draw = function (ctx) {
 		this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, false, true);
 	} else if(this.shoot) {
 		this.attackAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-		
+
 	} else {
 		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	}
+	Entity.prototype.draw.call(this);
+}
+
+
+//spell
+function Spell(game, spritesheet) {
+	this.animation = new Animation2(spritesheet, 2, 9, 63, 60, 8, 0.30, 8, true);
+	this.oppAnimation = new Animation2(spritesheet, 9, 252, 63, 60, 8, 0.30, 8, true);
+	this.xOriginal = 400;
+	this.yOriginal = 350;
+	this.xPosition = 400;
+	this.yPosition = 350;
+	this.ctx = game.ctx;
+	this.fire = false;
+	Entity.call(this, game, 400, 350);//position where it start
+}
+
+Spell.prototype = new Entity();
+Spell.prototype.constructor = Magician;
+
+Spell.prototype.update = function () {
+	if (this.game.click) {
+		this.xPosition = this.game.position.x - (this.game.position.x % 10);
+		this.yPosition = this.game.position.y - (this.game.position.y % 10);
+		//console.log(this.yOriginal);
+		this.xOriginal = 400;
+		this.yOriginal = 350;
+		this.fire = true;
+	}
+	if(this.xOriginal < this.xPosition) {
+		this.x = this.xOriginal;
+		this.xOriginal += 5;
+	}
+	if(this.xOriginal > this.xPosition){
+		this.x = this.xOriginal;
+		this.xOriginal -= 5;
+	} 
+	if(this.yOriginal < this.yPosition) {
+		this.y = this.yOriginal;
+		this.yOriginal += 5;
+	}
+	if(this.yOriginal > this.yPosition){
+		this.y = this.yOriginal;
+		this.yOriginal -= 5;
+	} 
+	if(this.xOriginal == this.xPosition && this.yOriginal == this.yPosition) {
+		this.fire = false;
+
+
+	}
+
+	Entity.prototype.update.call(this);
+}
+
+Spell.prototype.draw = function () {
+	if(this.fire) {
+		if(this.xPosition < 400) {
+			this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+		} else {
+			this.oppAnimation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+		}
+
 	}
 	Entity.prototype.draw.call(this);
 }
@@ -602,6 +665,7 @@ AM.queueDownload("./img/explosion.png");
 AM.queueDownload("./img/Magician1.png");
 AM.queueDownload("./img/snowball.png");
 AM.queueDownload("./img/light.png");
+AM.queueDownload("./img/fireball_0.png");
 
 
 AM.downloadAll(function () {
@@ -624,6 +688,7 @@ AM.downloadAll(function () {
 	gameEngine.addEntity(new FireBall(gameEngine, AM.getAsset("./img/explosion.png")));
 	gameEngine.addEntity(new Light(gameEngine, AM.getAsset("./img/light.png")));
 	gameEngine.addEntity(new Snowball(gameEngine, AM.getAsset("./img/snowball.png")));
+	gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
 
 	console.log("All Done!");
 });
