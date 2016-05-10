@@ -18,6 +18,8 @@ AM.queueDownload("./img/Magician1.png");
 AM.queueDownload("./img/snowball.png");
 AM.queueDownload("./img/light.png");
 AM.queueDownload("./img/fireball_0.png");
+AM.queueDownload("./img/coin.png");
+AM.queueDownload("./img/heart.png");
 
 
 AM.downloadAll(function () {
@@ -42,6 +44,8 @@ AM.downloadAll(function () {
 	gameEngine.addEntity(new Light(gameEngine, AM.getAsset("./img/light.png")));
 	gameEngine.addEntity(new Snowball(gameEngine, AM.getAsset("./img/snowball.png")));
 	gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
+	gameEngine.addEntity(new Coin(gameEngine, AM.getAsset("./img/coin.png")));
+	gameEngine.addEntity(new Heart(gameEngine, AM.getAsset("./img/heart.png")));
 
 	console.log("All Done!");
 });

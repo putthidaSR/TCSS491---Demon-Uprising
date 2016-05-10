@@ -554,7 +554,8 @@ Bird.prototype.draw = function () {
 //Human
 function Human1(game, spritesheet) {
 	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.5);
-	this.healthbar = new Animation(spritesheet, 256, 40, 0.1, 0.01, 0, true, 0.5);
+	this.fullhealthbar = new Animation(spritesheet, 256, 64, 256, 0.01, 1, true, 0.5);
+	//this.healthbar = new Animation2(spritesheet, 61, 72, 47, 59, 4, 0.15, 1, true);
 
 	this.speed = 350;
 	this.ctx = game.ctx;
@@ -572,12 +573,12 @@ Human1.prototype.update = function () {
 	Entity.prototype.update.call(this);
 }
 
-Human1.prototype.draw = function () {
+Human1.prototype.draw = function (ctx) {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
 
 	Entity.prototype.draw.call(this);
-	this.healthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-
+	this.fullhealthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	
 }
 
 //Explosion
@@ -653,4 +654,50 @@ Snowball.prototype.draw = function () {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
 	Entity.prototype.draw.call(this);
 
+}
+
+//Coin
+function Coin(game, spritesheet) {
+	this.animation = new Animation(spritesheet, 100, 100, 100, 0.08, 10, true, 0.4);
+	this.speed = 80;
+	this.ctx = game.ctx;
+	Entity.call(this, game, 960, 20);
+
+}
+
+Coin.prototype = new Entity();
+Coin.prototype.constructor = Coin;
+
+Coin.prototype.update = function () {
+	Entity.prototype.update.call(this);
+}
+
+Coin.prototype.draw = function () {
+	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	Entity.prototype.draw.call(this);
+
+}
+
+//heart
+function Heart(game, spritesheet) {
+	this.animation = new Animation(spritesheet, 300, 250, 300, 0.08, 1, true, 0.12);
+	this.speed = 80;
+	this.ctx = game.ctx;
+	Entity.call(this, game, 910, 23);
+}
+
+Heart.prototype = new Entity();
+Heart.prototype.constructor = Heart;
+
+Heart.prototype.update = function () {
+	Entity.prototype.update.call(this);
+}
+
+
+Heart.prototype.draw = function () {
+	//this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	//Entity.prototype.draw.call(this);
+	//ctx.drawImage(AM.getAsset("./img/heart.png"), 900, 100);
+	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	Entity.prototype.draw.call(this);
 }
