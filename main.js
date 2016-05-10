@@ -1,7 +1,11 @@
 var AM = new AssetManager();
+var gameEngine = new GameEngine();
 
+
+AM.queueDownload("./img/titleScreen1.jpg");
+AM.queueDownload("./img/textbox.png");
 AM.queueDownload("./img/magician.png");
-AM.queueDownload("./img/bgg.png");
+AM.queueDownload("./img/gameboard.jpg");
 AM.queueDownload("./img/walk1.png");
 AM.queueDownload("./img/Animal.png");
 AM.queueDownload("./img/hero2.png");
@@ -23,7 +27,7 @@ AM.downloadAll(function () {
 	gameEngine.init(ctx);
 	gameEngine.start();
 
-	gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/bgg.png")));
+	gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/gameboard.jpg")));
 	gameEngine.addEntity(new Magician(gameEngine, AM.getAsset("./img/magician.png")));
 	gameEngine.addEntity(new Human1(gameEngine, AM.getAsset("./img/walk1.png")));
 	gameEngine.addEntity(new Bird(gameEngine, AM.getAsset("./img/Animal.png")));
@@ -39,3 +43,21 @@ AM.downloadAll(function () {
 
 	console.log("All Done!");
 });
+
+var CANVAS_WIDTH = 1000;
+var CANVAS_HEIGHT = 600;
+
+var makeSceneManager = function (gameEngine) {
+   
+    var titleScene = new Title(gameEngine);
+    var tutorialScene = new Tutorial(gameEngine);
+    
+    var r1 = createFirstRound(gameEngine); // first round
+ 
+    titleScene.next = r1;
+    titleScene.tutorialScene = tutorialScene;
+    tutorialScene.next = titleScene;
+
+    return new SceneManager(gameEngine, logoSplash);
+};
+
