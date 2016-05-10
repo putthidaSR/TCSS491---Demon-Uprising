@@ -4,6 +4,7 @@ var gameEngine = new GameEngine();
 
 AM.queueDownload("./img/titleScreen1.jpg");
 AM.queueDownload("./img/textbox.png");
+AM.queueDownload("./img/health_bar.png");
 AM.queueDownload("./img/magician.png");
 AM.queueDownload("./img/gameboard.jpg");
 AM.queueDownload("./img/walk1.png");
@@ -30,6 +31,7 @@ AM.downloadAll(function () {
 	gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/gameboard.jpg")));
 	gameEngine.addEntity(new Magician(gameEngine, AM.getAsset("./img/magician.png")));
 	gameEngine.addEntity(new Human1(gameEngine, AM.getAsset("./img/walk1.png")));
+	gameEngine.addEntity(new Human1(gameEngine, AM.getAsset("./img/health_bar.png")));
 	gameEngine.addEntity(new Bird(gameEngine, AM.getAsset("./img/Animal.png")));
 	gameEngine.addEntity(new Hero(gameEngine, AM.getAsset("./img/hero2.png")));
 	gameEngine.addEntity(new Demon(gameEngine, AM.getAsset("./img/demon.png")));

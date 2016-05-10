@@ -454,8 +454,10 @@ function Hero(game, spritesheet) {
 
 }
 
-Hero.prototype.draw = function () {
+Hero.prototype.draw = function (ctx) {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    //ctx.drawImage(AM.getAsset("./img/health_bar.png"), 0, 0, 23, 92);
+
 }
 
 Hero.prototype.update = function () {
@@ -552,6 +554,8 @@ Bird.prototype.draw = function () {
 //Human
 function Human1(game, spritesheet) {
 	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.5);
+	this.healthbar = new Animation(spritesheet, 256, 40, 0.1, 0.01, 0, true, 0.5);
+
 	this.speed = 350;
 	this.ctx = game.ctx;
 	Entity.call(this, game, 0, 330);
@@ -570,7 +574,9 @@ Human1.prototype.update = function () {
 
 Human1.prototype.draw = function () {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+
 	Entity.prototype.draw.call(this);
+	this.healthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
 
 }
 
