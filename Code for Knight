@@ -1,0 +1,66 @@
+function KnightAttack(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+    this.speed = 250;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 0, 250);
+}
+
+KnightAttack.prototype = new Entity();
+KnightAttack.prototype.constructor = KnightAttack;
+
+KnightAttack.prototype.update = function () {
+    this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+    Entity.prototype.update.call(this);
+}
+
+KnightAttack.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+function KnightWalk(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+    this.speed = 200;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 0, 470);
+}
+
+KnightWalk.prototype = new Entity();
+KnightWalk.prototype.constructor = KnightWalk;
+
+KnightWalk.prototype.update = function () {
+    this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+    Entity.prototype.update.call(this);
+}
+
+KnightWalk.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+function KnightRun(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+    this.speed = 200;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 0, 30);
+}
+
+KnightRun.prototype = new Entity();
+KnightRun.prototype.constructor = KnightRun;
+
+KnightRun.prototype.update = function () {
+    this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+    Entity.prototype.update.call(this);
+}
+
+KnightRun.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+AM.queueDownload("./img/knightattack.png");
+AM.queueDownload("./img/knightwalk.png");
+AM.queueDownload("./img/knightrun.png");
