@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demon Uprising</title>
+    
+    	<link rel="stylesheet" type="text/css" href="style.css" />
+    
+    <script type="text/javascript" src="./gameengine.js"></script>
+        <script type="text/javascript" src="./assetmanager.js"></script>
+    
+    <script type="text/javascript" src="./entity.js"></script>
+    
+    <script type="text/javascript" src="./scenemanager.js"></script>
+	<script type="text/javascript" src="./title.js"></script>        
+
+    <script type="text/javascript" src="./dragdrop.js"></script>
+    <script type="text/javascript" src="./animation.js"></script>
+       
+   	<script type="text/javascript" src="./tutorial.js"></script>
+            
+    <script type="text/javascript" src="./main.js"></script> 
+
+    
+</head>
+
+<body>
+
+<div><img src="./img/comingsoon.jpg" alt="Coming soon..." style="width:800px;height:470px;">
+	
+</div>
+
+
+<section id="leftbox" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)">
+    <canvas id="gameWorld" tabindex="1" width="1000" height="600" style="border: 1px solid brown; background: lightskyblue"></canvas>
+</section>	
+
+
+
+	<div class="boxed">
+  	
+  		<p>Magician movement:</p>
+ 
+  		<ul>
+  			<li>Press A to turn left</li>
+  			<li>Press D to turn right</li>
+  			<li>Press W to go up</li>
+   			<li>Press S to go down</li>
+    		<li>Press Space to perform a magic</li>
+		</ul>
+
+	</div>
+	
+<section id="rightbox">
+	<img id="magicianpic" src="./img/magician2.PNG">
+</section>	
+
+<div class="boxed">
+  	
+  	<p>Drag magician (picture above) on the canvas screen to start the magical world...</p>
+ 
+	</div>
+
+</body>
+
+</html>

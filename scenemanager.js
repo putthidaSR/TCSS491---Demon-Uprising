@@ -41,18 +41,18 @@ SceneManager.prototype.constructor = SceneManager;
 
 SceneManager.prototype.reinitRoundsAndLinks = function () {
   
-    var tutorialScene = new Tutorial(this.game);
-    var r1 = createFirstRound(this.game); // first round
+   // var tutorialScene = new Tutorial(this.game);
+    var r1 = startGame(this.game); // first round
 
     this.currentScene.roundScene = r1; 
-    this.currentScene.tutorialScene = tutorialScene;
-    tutorialScene.next = this.currentScene;
+//    this.currentScene.tutorialScene = tutorialScene;
+//    tutorialScene.next = this.currentScene;
     r1.next = eg;
     eg.next = this.currentScene; // this.currentScene is Title
 };
 
 SceneManager.prototype.draw = function (ctx) {
-    this.currentScene.draw(ctx);
+  //  this.currentScene.draw(ctx);
 };
 
 SceneManager.prototype.reset = function () {

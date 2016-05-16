@@ -282,22 +282,27 @@ Spell.prototype.update = function () {
 		this.yOriginal = 350;
 		this.fire = true;
 	}
+	
 	if(this.xOriginal < this.xPosition) {
 		this.x = this.xOriginal;
 		this.xOriginal += 5;
 	}
+	
 	if(this.xOriginal > this.xPosition){
 		this.x = this.xOriginal;
 		this.xOriginal -= 5;
 	} 
+	
 	if(this.yOriginal < this.yPosition) {
 		this.y = this.yOriginal;
 		this.yOriginal += 5;
 	}
+	
 	if(this.yOriginal > this.yPosition){
 		this.y = this.yOriginal;
 		this.yOriginal -= 5;
 	} 
+	
 	if(this.xOriginal == this.xPosition && this.yOriginal == this.yPosition) {
 		this.fire = false;
 
@@ -456,7 +461,7 @@ function Hero(game, spritesheet) {
 
 Hero.prototype.draw = function (ctx) {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-    //ctx.drawImage(AM.getAsset("./img/health_bar.png"), 0, 0, 23, 92);
+	//ctx.drawImage(AM.getAsset("./img/health_bar.png"), 0, 0, 23, 92);
 
 }
 
@@ -553,13 +558,14 @@ Bird.prototype.draw = function () {
 
 //Human
 function Human1(game, spritesheet) {
-	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.5);
-	this.fullhealthbar = new Animation(spritesheet, 256, 64, 256, 0.01, 1, true, 0.5);
+	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.2);
+	this.fullhealthbar = new Animation(spritesheet, 256, 64, 256, 0.1, 1, true, 0.2);
 	//this.healthbar = new Animation2(spritesheet, 61, 72, 47, 59, 4, 0.15, 1, true);
 
-	this.speed = 350;
+	this.speed = 100;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 0, 330);
+	Entity.call(this, game, 0, 30);
+
 
 }
 
@@ -568,17 +574,45 @@ Human1.prototype.constructor = Human1;
 
 Human1.prototype.update = function () {
 
-	this.x += this.game.clockTick * this.speed;
-	if (this.x > 800) this.x = -230;
+	isX = true;
+	isY = false;
+
+	isGoal = true;
+
+	while(isGoal) {
+
+		if(isX === true) {
+			this.x += this.game.clockTick * this.speed;
+		} else if (isX === false) {
+			this.y += this.game.clockTick * this.speed;
+		}
+
+		//if (this.x > 800) this.x = -230;
+
+		if (this.x > 240) {
+			this.x = -230;
+			console.log("move horizontal??");
+			isX = false;
+
+		}
+		
+		if (this.x === 240 && isX === false) {
+			this.y = 230;
+			console.log("move verticle??");
+			
+		} 
+		
+		isGoal = false;
+	}
+	
 	Entity.prototype.update.call(this);
 }
 
 Human1.prototype.draw = function (ctx) {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-
-	Entity.prototype.draw.call(this);
 	this.fullhealthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-	
+	Entity.prototype.draw.call(this);
+
 }
 
 //Explosion
