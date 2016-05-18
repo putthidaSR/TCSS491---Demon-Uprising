@@ -1,5 +1,5 @@
 function KnightAttack(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.045);
     this.speed = 250;
     this.ctx = game.ctx;
     Entity.call(this, game, 0, 250);
@@ -19,29 +19,50 @@ KnightAttack.prototype.draw = function () {
     Entity.prototype.draw.call(this);
 }
 
-function KnightWalk(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+function KnightWalkLeft(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.045);
     this.speed = 200;
     this.ctx = game.ctx;
-    Entity.call(this, game, 0, 470);
+    Entity.call(this, game, 50, 470);
 }
 
-KnightWalk.prototype = new Entity();
-KnightWalk.prototype.constructor = KnightWalk;
+KnightWalkLeft.prototype = new Entity();
+KnightWalkLeft.prototype.constructor = KnightWalkLeft;
 
-KnightWalk.prototype.update = function () {
+KnightWalkLeft.prototype.update = function () {
     this.x += this.game.clockTick * this.speed;
     if (this.x > 800) this.x = -230;
     Entity.prototype.update.call(this);
 }
 
-KnightWalk.prototype.draw = function () {
+KnightWalkLeft.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+function KnightWalkDown(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.15, 10, true, 0.045);
+    this.speed = 90;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 0, 0);
+}
+
+KnightWalkDown.prototype = new Entity();
+KnightWalkDown.prototype.constructor = KnightWalkDown;
+
+KnightWalkDown.prototype.update = function () {
+    this.y += this.game.clockTick * this.speed;
+    if (this.y > 800) this.y = -230;
+    Entity.prototype.update.call(this);
+}
+
+KnightWalkDown.prototype.draw = function () {
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
 
 function KnightRun(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.1);
+    this.animation = new Animation(spritesheet, 587, 707, 5, 0.1, 10, true, 0.045);
     this.speed = 200;
     this.ctx = game.ctx;
     Entity.call(this, game, 0, 30);
@@ -64,3 +85,8 @@ KnightRun.prototype.draw = function () {
 AM.queueDownload("./img/knightattack.png");
 AM.queueDownload("./img/knightwalk.png");
 AM.queueDownload("./img/knightrun.png");
+
+gameEngine.addEntity(new KnightAttack(gameEngine, AM.getAsset("./img/knightattack.png")));
+gameEngine.addEntity(new KnightWalkLeft(gameEngine, AM.getAsset("./img/knightwalk.png")));
+gameEngine.addEntity(new KnightRun(gameEngine, AM.getAsset("./img/knightrun.png")));
+gameEngine.addEntity(new KnightWalkDown(gameEngine, AM.getAsset("./img/knightwalk.png")));
