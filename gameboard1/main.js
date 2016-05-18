@@ -58,8 +58,8 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/tileSheet.jpg"), firstMap));
 
 	//gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/gameboard.jpg")));
-	gameEngine.addEntity(new Magician(gameEngine, board, AM.getAsset("./img/magician.png"), 
-			AM.getAsset("./img/magician2.png")));
+	//gameEngine.addEntity(new Magician(gameEngine, board, AM.getAsset("./img/magician.png"), 
+	//		AM.getAsset("./img/magician2.png")));
 	//gameEngine.addEntity(new Human1(gameEngine, AM.getAsset("./img/health_bar.png")));
 	//gameEngine.addEntity(new FireBall(gameEngine, AM.getAsset("./img/explosion.png")));
 	//gameEngine.addEntity(new Light(gameEngine, AM.getAsset("./img/light.png")));
