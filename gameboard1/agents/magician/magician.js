@@ -12,9 +12,10 @@ function Magician(game, board, spritesheet, spritesheet2) {
     this.left = false;
     this.space = false;
     this.move = false;
-    board.getStart();
-    this.xPosition = board.startx;
-    this.yPosition = board.starty;
+    this.board = board;
+    this.nextMove = board.getStart();
+    this.xPosition = this.nextMove.x;
+    this.yPosition = this.nextMove.y;
     console.log("x: " + this.xPosition);
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
@@ -23,70 +24,8 @@ Magician.prototype = new Entity();
 Magician.prototype.constructor = Magician;
 
 Magician.prototype.update = function () {
-	//checking which key board is click
-	if (this.game.w) {
-		this.change("up");
-		console.log("yes");
-	}
-	if (this.game.s) {
-		this.change("down");
-		console.log("yes");
-	}
-	if (this.game.a) {
-		this.change("left");
-		console.log("yes");
-	}
-	if (this.game.d) {
-		this.change("right");
-		console.log("yes");
-	}
-	if (this.game.space) {
-		this.change("space");
-		console.log("yes");
-	}
-	//move the character
-    if (this.up) {
-        if(this.move) {
-	        this.yPosition -= 15;
-	        if(this.yPosition <= 0) {
-	        	this.yPosition = 0;
-	        }
-	        this.move = false;
-        }
-        this.y = this.yPosition;
-    } else if(this.down) {
-    	if(this.move) {
-	        this.yPosition += 15;
-	        if(this.yPosition >= 645) {
-	        	this.yPosition = 645;
-	        }
-	        this.move = false;
-        }
-        this.y = this.yPosition;
-    } else if(this.right) {
-    	if(this.move) {
-	        this.xPosition += 15;
-	        if(this.xPosition >= 750) {
-	        	this.xPosition = 750;
-	        }
-	        this.move = false;
-        }
-        this.x = this.xPosition;
-    } else if(this.left) {
-    	if(this.move) {
-	        this.xPosition -= 15;
-	        if(this.xPosition <= 0) {
-	        	this.xPosition = 0;
-	        }
-	        this.move = false;
-        }
-        this.x = this.xPosition;
-    } else if(this.space) {
-    	if (this.attackAnimation.isDone()) {
-            this.attackAnimation.elapsedTime = 0;
-            this.space = false;
-        }
-    }
+	this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
+	
     
     Entity.prototype.update.call(this);
 }
@@ -117,7 +56,7 @@ Magician.prototype.draw = function (ctx) {
     } else if(this.space) {
     	this.attackAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     } else {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+        this.animation.drawFrame(this.game.clockTick, ctx, this.nextMove.x, this.nextMove.y);
     }
     Entity.prototype.draw.call(this);
 }
