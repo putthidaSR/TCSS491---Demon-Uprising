@@ -1,15 +1,3 @@
-var GAME_CONSTANT = {
-    BLOCK_SIZE : 30,
-    BLOCK_GRASS_X : 185,
-    BLOCK_GRASS_Y : 370,
-    BLOCK_ROAD_X : 0,
-    BLOCK_ROAD_Y : 92,
-    BLOCK_SHEETWIDTH : 1,
-    BLOCK_FRAMEDURATION : 0.3,
-    BLOCK_FRAMES : 1,
-    BLOCK_LOOP: true,
-}
-
 function Entity(game, x, y) {
     this.game = game;
     this.x = x;
