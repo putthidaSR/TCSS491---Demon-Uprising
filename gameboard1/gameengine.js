@@ -63,6 +63,8 @@ GameEngine.prototype.startInput = function () {
     		case 'KeyS': that.s = true; break;
     		case 'KeyA': that.a = true; break;
     		case 'KeyD': that.d = true; break;
+    		case 'Key1': that.one = true; break;
+    		case 'Key2': that.two = true; break;
     		default: console.log("something else");
     	}
         console.log(e);
@@ -126,6 +128,8 @@ GameEngine.prototype.loop = function () {
     this.a = null;
     this.s = null;
     this.d = null;
+    this.one = null;
+    this.two = null;
     this.mouse = null;
     this.click = null;
     this.position = null;
