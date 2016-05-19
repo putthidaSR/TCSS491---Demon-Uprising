@@ -1,3 +1,17 @@
+var GAME_CONSTANT = {
+    BLOCK_SIZE : 30,
+    BLOCK_GRASS_X : 185,
+    BLOCK_GRASS_Y : 370,
+    BLOCK_ROAD_X : 0,
+    BLOCK_ROAD_Y : 92,
+    BLOCK_SHEETWIDTH : 1,
+    BLOCK_FRAMEDURATION : 0.3,
+    BLOCK_FRAMES : 1,
+    BLOCK_LOOP: true,
+    CANVAS_WIDTH: 1000,
+    CANVAS_HEIGHT: 800,
+}
+
 function GameBoard(game, map) {
     this.game = game;
     this.map = map;
@@ -5,38 +19,40 @@ function GameBoard(game, map) {
     this.startXArray = [];
     this.startYArray = [];
     this.humanList = [];
-    this.startx = null;
-    this.starty = null;
     this.clockTick = 0;
-    this.setState(7);
+    this.setState(10);
+    this.fireballActivated = false;
 }
 
 GameBoard.prototype = new Entity();
 GameBoard.prototype.constructor = GameBoard;
 
 GameBoard.prototype.update = function () {
-    
     Entity.prototype.update.call(this);
     this.clockTick++;
-    if(this.clockTick > Math.random() * 1000 + 100 && this.humanList.length > 0) {
+    if(this.clockTick > Math.random() * 3000 + 100 && this.humanList.length > 0) {
     	this.game.addEntity(this.humanList.pop());
         this.clockTick = 0;
     }
-    
+    if(this.game.one) {
+    	this.fireballActivated = true;
+    } else if(this.game.two) {
+    	this.fireballActivated = false;
+    }
 }
 
 GameBoard.prototype.draw = function (ctx) {
 }
 
 GameBoard.prototype.getStart = function () {
+	//getting the starting point of the human
     var start = Math.floor(Math.random() * this.startXArray.length);
-    this.startx = this.startXArray[start] * GAME_CONSTANT.BLOCK_SIZE;
-    this.starty = this.startYArray[start] * GAME_CONSTANT.BLOCK_SIZE;
-    return {x: this.startx, y: this.starty, nextDir: "a"};
-
+    return {x: this.startXArray[start] * GAME_CONSTANT.BLOCK_SIZE, 
+    	y: this.startYArray[start] * GAME_CONSTANT.BLOCK_SIZE, nextDir: "a"};
 }
 
 GameBoard.prototype.setState = function (level) {
+	//checking where the starting point is
     for(var row = 0; row < this.map.length; row++) {
 	    for(var col = 0; col < this.map[row].length; col++) {
 	        if(this.map[row][col] == "s") {
@@ -46,6 +62,7 @@ GameBoard.prototype.setState = function (level) {
 	        }
 	    }
 	}
+    //set how many human are spawning for each level
     for(var populated = 0; populated < level; populated++) {
         this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
 			AM.getAsset("./img/magician2.png")));
@@ -53,15 +70,25 @@ GameBoard.prototype.setState = function (level) {
 }
 
 GameBoard.prototype.getNextStep = function (x, y, nextDir) {
-    var xpostion = x / GAME_CONSTANT.BLOCK_SIZE;
-    var ypostion = y / GAME_CONSTANT.BLOCK_SIZE; 
-    if(xpostion == 0) {
-        ypostion++;
-    } else if (ypostion == 0) {
-        xpostion++;
+    var xposition = x / GAME_CONSTANT.BLOCK_SIZE;
+    var yposition = y / GAME_CONSTANT.BLOCK_SIZE; 
+    if(xposition == 0) {
+    	xposition++;
+    } else if (yposition == 0) {
+    	yposition++;
+    } else if(xposition == GAME_CONSTANT.CANVAS_WIDTH) {
+    	xposition--;
     }
-    if(nextDir == "r") {
-        ypostion++;
+    switch(nextDir) {
+		case "u": yposition--; break;
+		case "d": yposition++; break;
+		case "l": xposition--; break;
+		case "r": xposition++; break;
+		case "a": break;
+		default: console.log(nextDir);
     }
-    return {x: xpostion * GAME_CONSTANT.BLOCK_SIZE, y: ypostion * GAME_CONSTANT.BLOCK_SIZE, nextDir: this.map[xpostion][ypostion]};
+    //console.log("dir: " + xposition + " y: " + yposition);
+    //console.log("dir: " + this.map[yposition][xposition]);
+    return {x: xposition * GAME_CONSTANT.BLOCK_SIZE, y: yposition * GAME_CONSTANT.BLOCK_SIZE, 
+    	nextDir: this.map[yposition][xposition]};
 }
