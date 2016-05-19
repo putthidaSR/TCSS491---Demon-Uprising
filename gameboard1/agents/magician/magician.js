@@ -14,9 +14,13 @@ function Magician(game, board, spritesheet, spritesheet2) {
     this.move = false;
     this.board = board;
     this.nextMove = board.getStart();
-    this.xPosition = this.nextMove.x;
-    this.yPosition = this.nextMove.y;
-    console.log("x: " + this.xPosition);
+    //this.speed = 50;
+    this.clocktick = 0;
+    this.xPosition = this.nextMove.x - 24;
+    this.yPosition = this.nextMove.y - 16;
+    this.prevX = this.xPosition;
+    this.prevY = this.yPosition;
+    console.log("dir: " + this.nextMove.y);
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
 
@@ -24,20 +28,41 @@ Magician.prototype = new Entity();
 Magician.prototype.constructor = Magician;
 
 Magician.prototype.update = function () {
-	this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
-	
-    
+	if(this.clocktick > GAME_CONSTANT.BLOCK_SIZE) {
+	this.clocktick = 0;
+	//console.log("movex " + this.yPosition);
+	//console.log("prevx " + this.prevY);
+		this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
+		this.xPosition = this.nextMove.x - 16;
+	    this.yPosition = this.nextMove.y;
+		this.change(this.nextMove.nextDir);
+	}
+	//movement
+	switch(this.nextMove.nextDir) {
+	case "u": this.prevY--; break;
+	case "d": this.prevY++; break;
+	case "l": this.prevX--; break;
+	case "r": this.prevX++; break;
+	case "a": break;
+	default: console.log(this.nextMove.nextDir);
+}
+	this.clocktick++;
     Entity.prototype.update.call(this);
 }
 
 //a helper method for update on which dirction it should face.
 Magician.prototype.change = function(dir) {
 	switch(dir) {
-		case "up": this.up = true; this.down = false; this.left = false; this.right = false; this.space = false; break;
-		case "down": this.up = false; this.down = true; this.left = false; this.right = false; this.space = false; break;
-		case "left": this.up = false; this.down = false; this.left = true; this.right = false; this.space = false; break;
-		case "right": this.up = false; this.down = false; this.left = false; this.right = true; this.space = false; break;
-		case "space": this.up = false; this.down = false; this.left = false; this.right = false; this.space = true; break;
+		case "u": this.up = true; this.down = false; this.left = false; 
+			this.right = false; this.space = false; break;
+		case "d": this.up = false; this.down = true; this.left = false; 
+			this.right = false; this.space = false; break;
+		case "l": this.up = false; this.down = false; this.left = true; 
+			this.right = false; this.space = false; break;
+		case "r": this.up = false; this.down = false; this.left = false; 
+			this.right = true; this.space = false; break;
+		case "space": this.up = false; this.down = false; this.left = false; 
+			this.right = false; this.space = true; break;
 		default: console.log("none");
 	}
 	this.move = true;
@@ -46,17 +71,17 @@ Magician.prototype.change = function(dir) {
 Magician.prototype.draw = function (ctx) {
 	//console.log(this.up);
 	if (this.up) {
-        this.upAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+        this.upAnimation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     } else if(this.down) {
-    	this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    	this.animation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     } else if(this.left) {
-    	this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    	this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     } else if(this.right) {
-    	this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    	this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     } else if(this.space) {
-    	this.attackAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    	this.attackAnimation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     } else {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.nextMove.x, this.nextMove.y);
+        this.animation.drawFrame(this.game.clockTick, ctx, this.prevX, this.prevY);
     }
     Entity.prototype.draw.call(this);
 }
