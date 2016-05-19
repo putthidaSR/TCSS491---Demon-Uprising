@@ -1,6 +1,12 @@
 var AM = new AssetManager();
 var gameEngine = new GameEngine();
 
+function distance(a, b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 
 AM.queueDownload("./img/titleScreen1.jpg");
 AM.queueDownload("./img/textbox.png");
@@ -25,37 +31,37 @@ AM.downloadAll(function () {
 	gameEngine.init(ctx);
 	gameEngine.start();
 	var firstMap = [
-"               sssss              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"               rrrrr              ",
-"      rrrrrrrrrwwwww              ",
-"      rrrrrrrrrrrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
-"      rrr      rrrrr              ",
+"     sssss                        ",
+"     ddddd                        ",
+"     ddddd                        ",
+"     ddddd                        ",
+"     ddddd                        ",
+"     ddddrrrrrrrrrrrrrrrd         ",
+"     ddrrrrrrrrrrrrrrrddd         ",
+"     rrrrrrrrrrrrrrrddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"                    ddddd         ",
+"          dlllllllllldddd         ",
+"          dddlllllllllldd         ",
+"          dddddllllllllll         ",
+"          ddddd                   ",
+"          ddddd                   ",
+"          ddddd                   ",
+"          ddddd                   ",
+"          ddddd                   ",
+"          ddddd                   ",
+"          eeeee                   ",
+"          eeeee                   ",
+"          eeeee                   ",
     ];
-    var board = new GameBoard(gameEngine, firstMap)
-    gameEngine.addEntity(board);
+	gameEngine.addEntity(new GameBoard(gameEngine, firstMap));
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/tileSheet.jpg"), firstMap));
+    gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png"), board));
 
 	//gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/gameboard.jpg")));
 	//gameEngine.addEntity(new Magician(gameEngine, board, AM.getAsset("./img/magician.png"), 
@@ -64,22 +70,11 @@ AM.downloadAll(function () {
 	//gameEngine.addEntity(new FireBall(gameEngine, AM.getAsset("./img/explosion.png")));
 	//gameEngine.addEntity(new Light(gameEngine, AM.getAsset("./img/light.png")));
 	//gameEngine.addEntity(new Snowball(gameEngine, AM.getAsset("./img/snowball.png")));
-	//gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
 	//gameEngine.addEntity(new Coin(gameEngine, AM.getAsset("./img/coin.png")));
 	//gameEngine.addEntity(new Heart(gameEngine, AM.getAsset("./img/heart.png")));
 	//x 33, y 27
 	//var firstLevel = new Level(gameEngine);
     
-    /*var mapBlock = {
-        "r" : new Animation(AM.getAsset("./img/tileSheet.jpg"), GAME_CONSTANT.BLOCK_GRASS_X, 
-        		GAME_CONSTANT.BLOCK_GRASS_Y,GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
-        		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
-        		GAME_CONSTANT.BLOCK_LOOP),
-        " " : new Animation(AM.getAsset("./img/tileSheet.jpg"),GAME_CONSTANT.BLOCK_ROAD_X, 
-        		GAME_CONSTANT.BLOCK_ROAD_Y, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
-        		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
-        		GAME_CONSTANT.BLOCK_LOOP)
-    };*/
     //mapBlock["r"].addFrame(0, 0);
     //mapBlock[" "].addFrame(0, 0);
     
