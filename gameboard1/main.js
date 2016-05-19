@@ -61,7 +61,7 @@ AM.downloadAll(function () {
     ];
 	gameEngine.addEntity(new GameBoard(gameEngine, firstMap));
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/tileSheet.jpg"), firstMap));
-    gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png"), board));
+    gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
 
 	//gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/gameboard.jpg")));
 	//gameEngine.addEntity(new Magician(gameEngine, board, AM.getAsset("./img/magician.png"), 
