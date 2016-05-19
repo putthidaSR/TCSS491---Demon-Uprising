@@ -36,7 +36,7 @@ Background.prototype.draw = function (ctx) {
 //	        			GAME_CONSTANT.BLOCK_SIZE * j, GAME_CONSTANT.BLOCK_SIZE * i,
 //	        			GAME_CONSTANT.BLOCK_SIZE * 1,
 //	        			GAME_CONSTANT.BLOCK_SIZE * 1);
-	        } else if(this.map[row][col] == "r" || this.map[row][col] == "s" || this.map[row][col] == "w") {
+	        } else if(this.map[row][col] == "r" || this.map[row][col] == "s" || this.map[row][col] == "l" || this.map[row][col] == "d" || this.map[row][col] == "u" || this.map[row][col] == "e") {
 	        	this.road.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
