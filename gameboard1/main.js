@@ -21,6 +21,11 @@ AM.queueDownload("./img/fireball_0.png");
 //AM.queueDownload("./img/coin.png");
 //AM.queueDownload("./img/heart.png");
 AM.queueDownload("./img/tileSheet.jpg");
+AM.queueDownload("./img/knightattack.png");
+AM.queueDownload("./img/knightattackotherdir.png");
+AM.queueDownload("./img/knightwalk.png");
+AM.queueDownload("./img/knightrun.png");
+AM.queueDownload("./img/knightwalkright.png");
 
 
 AM.downloadAll(function () {
