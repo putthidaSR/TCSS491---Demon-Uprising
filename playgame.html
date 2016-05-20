@@ -1,66 +1,118 @@
-
 <!DOCTYPE html>
 <html>
+
+
 <head>
     <meta charset="utf-8">
+    
     <title>Demon Uprising</title>
     
-    	<link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     
     <script type="text/javascript" src="./gameengine.js"></script>
-        <script type="text/javascript" src="./assetmanager.js"></script>
-    
+    <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./entity.js"></script>
-    
-    <script type="text/javascript" src="./scenemanager.js"></script>
-	<script type="text/javascript" src="./title.js"></script>        
-
-    <script type="text/javascript" src="./dragdrop.js"></script>
     <script type="text/javascript" src="./animation.js"></script>
-       
-   	<script type="text/javascript" src="./tutorial.js"></script>
-            
     <script type="text/javascript" src="./main.js"></script> 
-
     
+
 </head>
+
 
 <body>
 
-<div><img src="./img/comingsoon.jpg" alt="Coming soon..." style="width:800px;height:470px;">
+	<section id="leftbox" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)">
+    	<canvas id="gameWorld" tabindex="1" width="600" height="600" style="border: 1px solid brown; background: lightskyblue"></canvas>
+	</section>	
+
+  	<script type="text/javascript" src="./TowerShoot/mainLoop.js"></script>
+	<script type="text/javascript" src="./TowerShoot/attackerUnits.js"></script>
+	<script type="text/javascript" src="./TowerShoot/towerUnits.js"></script>
+	<script type="text/javascript" src="./TowerShoot/bullets.js"></script>
+	<script type="text/javascript" src="./TowerShoot/mouseClick.js"></script>
+
 	
-</div>
-
-
-<section id="leftbox" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', null)">
-    <canvas id="gameWorld" tabindex="1" width="1000" height="600" style="border: 1px solid brown; background: lightskyblue"></canvas>
-</section>	
-
-
-
-	<div class="boxed">
-  	
-  		<p>Magician movement:</p>
- 
-  		<ul>
-  			<li>Press A to turn left</li>
-  			<li>Press D to turn right</li>
-  			<li>Press W to go up</li>
-   			<li>Press S to go down</li>
-    		<li>Press Space to perform a magic</li>
-		</ul>
-
-	</div>
 	
-<section id="rightbox">
-	<img id="magicianpic" src="./img/magician2.PNG">
-</section>	
-
-<div class="boxed">
-  	
-  	<p>Drag magician (picture above) on the canvas screen to start the magical world...</p>
- 
+	<div>
+	<br>
+	<br>
 	</div>
+	<div class="boxed" style='background-color: green;' onclick='changeTower(0);'>
+		
+		Tower 1
+		<br>
+		Cost: 50
+		<br>
+		
+		<div class="grow" align="middle">
+			<img src="./img/tower1.png" alt="First Tower" id="tower1" style="width:100px;height:100px;">
+		</div>
+		
+		<!--
+		<br>
+		Range: med
+		<br>
+		Damage: med
+		<br>
+		Rate: med-->
+		<br>
+		</div>
+		<p>
+
+		<div class='boxed' style='background-color: brown;' onclick='changeTower(1);'>
+		Tower 2
+		<br>
+		Cost: 75
+		<br>
+		<div class="grow" align="middle">
+			<img src="./img/tower2.png" alt="Second Tower" id="tower2" align="middle" style="width:100px;height:100px;">
+		</div>
+		<!--
+		Range: long
+		<br>
+		Damage: med
+		<br>
+		Rate: high-->
+		<br>
+		</div>
+		<p>
+		
+		<div class='boxed' style='background-color:aqua;' onclick='changeTower(2);'>
+		Tower 3
+		<br>
+		Cost: 75 
+		<br>
+
+		<div class="grow" align="middle">
+		<img src="./img/tower3.png" alt="Third Tower" id = "tower3" style="width:120px;height:120px;">
+		</div>
+		
+		
+		<!--
+		Range: short
+		<br>
+		Damage: high
+		<br>
+		Rate: med
+		<br>-->
+	
+		</div>
+		
+		<br>
+
+	
+		<div class="boxed" style='width:200px;'>
+		
+		Attackers Score: <span id='attackersScore'>0</span>
+		<br>
+		Attackers Stopped: <span id='stopped'>0</span>
+		<br>
+		<br>
+		<img src="./img/coin_gold.png" style="width:50px;height:50px;">	
+		<br>
+		<span class='right'>Money: <span id='money'>500</span></span>
+		
+		</div>
 
 </body>
 

@@ -288,12 +288,12 @@ Spell.prototype.update = function () {
 		this.xOriginal += 5;
 	}
 	
-	if(this.xOriginal > this.xPosition){
+	if (this.xOriginal > this.xPosition){
 		this.x = this.xOriginal;
 		this.xOriginal -= 5;
 	} 
 	
-	if(this.yOriginal < this.yPosition) {
+	if (this.yOriginal < this.yPosition) {
 		this.y = this.yOriginal;
 		this.yOriginal += 5;
 	}
@@ -556,64 +556,88 @@ Bird.prototype.draw = function () {
 	Entity.prototype.draw.call(this);
 }
 
-//Human
-function Human1(game, spritesheet) {
-	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.2);
-	this.fullhealthbar = new Animation(spritesheet, 256, 64, 256, 0.1, 1, true, 0.2);
-	//this.healthbar = new Animation2(spritesheet, 61, 72, 47, 59, 4, 0.15, 1, true);
+////Human
+//function Human1(game, spritesheet) {
+//	this.animation = new Animation(spritesheet, 250, 221, 200, 0.1, 10, true, 0.2);
+//	this.fullhealthbar = new Animation(spritesheet, 256, 64, 256, 0.1, 1, true, 0.2);
+//	//this.healthbar = new Animation2(spritesheet, 61, 72, 47, 59, 4, 0.15, 1, true);
+//
+//	this.left = false;
+//	this.right = true;
+//	this.up = false;
+//	this.down = false;
+//	
+////	this.x = x;
+////	this.y = y;
+//	
+//	this.speed = 150;
+//	this.ctx = game.ctx;
+//	Entity.call(this, game, 0, 50);
+//
+//
+//}
+//
+//Human1.prototype = new Entity();
+//Human1.prototype.constructor = Human1;
+////Human1.prototype.speed = baseSpeed;
+//
+//
+//Human1.prototype.update = function () {
+//    
+//	//this.x += this.game.clockTick * this.speed;
+//	//console.log("x = " + this.x + ", y = " + this.y);
+//	//var move = this.speed;
+//	//move right
+//	
+//
+//	if(this.x < 855) {
+//		//console.log("moveeee...");	
+//		this.x += this.game.clockTick * this.speed;
+//	} 
+//	
+//	else if(this.x >= 855 && this.y < 580) {
+//		//console.log("move YYYYYY...");	
+//		this.y += this.game.clockTick * this.speed;
+//		
+//		
+//	} else if (this.x >= 855 && this.y >= 580) {
+//			this.removeFromWorld = true;
+//
+//	}
+//	Entity.prototype.update.call(this);
+//}
+//
+//Human1.prototype.draw = function (ctx) {
+//	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+//	this.fullhealthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+//	Entity.prototype.draw.call(this);
+//
+//}
 
-	this.speed = 100;
-	this.ctx = game.ctx;
-	Entity.call(this, game, 0, 30);
 
-
-}
-
-Human1.prototype = new Entity();
-Human1.prototype.constructor = Human1;
-
-Human1.prototype.update = function () {
-
-	isX = true;
-	isY = false;
-
-	isGoal = true;
-
-	while(isGoal) {
-
-		if(isX === true) {
-			this.x += this.game.clockTick * this.speed;
-		} else if (isX === false) {
-			this.y += this.game.clockTick * this.speed;
-		}
-
-		//if (this.x > 800) this.x = -230;
-
-		if (this.x > 240) {
-			this.x = -230;
-			console.log("move horizontal??");
-			isX = false;
-
-		}
-		
-		if (this.x === 240 && isX === false) {
-			this.y = 230;
-			console.log("move verticle??");
-			
-		} 
-		
-		isGoal = false;
-	}
-	
-	Entity.prototype.update.call(this);
-}
-
-Human1.prototype.draw = function (ctx) {
-	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-	this.fullhealthbar.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-	Entity.prototype.draw.call(this);
-
-}
+////faster enemy
+//var FastEnemy = function(x,y) {
+//	Enemy.call(this,x,y);
+//};
+//FastEnemy.prototype = Object.create(Enemy.prototype);
+//FastEnemy.prototype.constructor = FastEnemy;
+//
+//FastEnemy.prototype.speed = Enemy.prototype.speed*1.4;
+//FastEnemy.prototype.color = 'DarkRed';
+//
+////stronger enemy
+//var StrongEnemy = function(x,y) {
+//	Enemy.call(this,x,y);
+//};
+//StrongEnemy.prototype = Object.create(Enemy.prototype);
+//StrongEnemy.prototype.constructor = StrongEnemy;
+//
+//StrongEnemy.prototype.color = 'FireBrick';
+//StrongEnemy.prototype.maxLife = Enemy.prototype.maxLife*2;
+//
+//
+////list of enemy types
+//var enemyTypes = [Enemy,FastEnemy,StrongEnemy];
 
 //Explosion
 function FireBall(game, spritesheet) {
