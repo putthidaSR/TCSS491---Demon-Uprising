@@ -66,6 +66,9 @@ GameBoard.prototype.setState = function (level) {
     for(var populated = 0; populated < level; populated++) {
         this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
 			AM.getAsset("./img/magician2.png")));
+	this.humanList.push(new Human(this.game, this, AM.getAsset("./img/knightwalk.png"), 
+        		AM.getAsset("./img/knightrun.png"), AM.getAsset("./img/knightattack.png"),
+        		AM.getAsset("./img/knightwalkright.png"), AM.getAsset("./img/knightattackotherdir.png")));
     }
 }
 
