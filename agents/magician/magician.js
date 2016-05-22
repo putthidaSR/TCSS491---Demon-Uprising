@@ -62,7 +62,8 @@ Magician.prototype.end = function() {
         	
         	this.game.entities[i].removeFromWorld = true;
         	BOARD_CONSTANT.HEALTH -= 1;
-        	
+            document.getElementById('health').innerHTML = BOARD_CONSTANT.HEALTH;
+
         	
             break;
         }
