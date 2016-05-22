@@ -3,7 +3,6 @@ canvas {
     padding: 0;
     margin: auto;
     display: block;
-    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
@@ -67,6 +66,26 @@ animation: animatedBackground 40s linear infinite;
   width: 150px;
   color: white;
 }
+
+
+div.fixed1 {
+    position: fixed;
+    bottom: 50;
+    right: 0;
+    width: 300px;
+    border: 3px solid #73AD21;
+}
+
+.right {
+    position: absolute;
+    right: 150px;
+    top: 15px;
+    width: 200px;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+
 
 #gameCanvas{
     position:relative;
