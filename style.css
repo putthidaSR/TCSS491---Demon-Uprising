@@ -85,6 +85,15 @@ div.fixed1 {
     padding: 10px;
 }
 
+.fireballbox {
+	position: absolute;
+	right: 0;
+	top: 15px;
+    width: 100px;
+    border: 3px solid #73AD21;
+    padding: 10px;
+
+}
 
 
 #gameCanvas{
