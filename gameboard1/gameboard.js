@@ -69,6 +69,18 @@ GameBoard.prototype.setState = function (level) {
 	this.humanList.push(new Human(this.game, this, AM.getAsset("./img/knightwalk.png"), 
         		AM.getAsset("./img/knightrun.png"), AM.getAsset("./img/knightattack.png"),
         		AM.getAsset("./img/knightwalkright.png"), AM.getAsset("./img/knightattackotherdir.png")));
+        this.humanList.push(new Human2(this.game, this, AM.getAsset("./img/human2run.png"), 
+    			AM.getAsset("./img/human2attack.png"), AM.getAsset("./img/human2run2.png"),
+    			AM.getAsset("./img/human2attack2.png")));
+        this.humanList.push(new Human3(this.game, this, AM.getAsset("./img/human3run.png"), 
+    			AM.getAsset("./img/human3attack.png"), AM.getAsset("./img/human3run2.png"),
+    			AM.getAsset("./img/human3attack2.png")));
+        this.humanList.push(new Human4(this.game, this, AM.getAsset("./img/human4run.png"), 
+    			AM.getAsset("./img/human4attack.png"), AM.getAsset("./img/human4run2.png"),
+    			AM.getAsset("./img/human4attack2.png")));
+        this.humanList.push(new Human5(this.game, this, AM.getAsset("./img/human5run.png"), 
+    			AM.getAsset("./img/human5attack.png"), AM.getAsset("./img/human5run2.png"),
+    			AM.getAsset("./img/human5attack2.png")));
     }
 }
 
