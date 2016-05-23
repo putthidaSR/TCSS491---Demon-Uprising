@@ -27,6 +27,26 @@ AM.queueDownload("./img/knightwalk.png");
 AM.queueDownload("./img/knightrun.png");
 AM.queueDownload("./img/knightwalkright.png");
 
+AM.queueDownload("./img/human2attack.png");
+AM.queueDownload("./img/human2run.png");
+AM.queueDownload("./img/human2attack2.png");
+AM.queueDownload("./img/human2run2.png");
+
+AM.queueDownload("./img/human3walk.png");
+AM.queueDownload("./img/human3attack.png");
+AM.queueDownload("./img/human3walk2.png");
+AM.queueDownload("./img/human3attack2.png");
+
+AM.queueDownload("./img/human4run.png");
+AM.queueDownload("./img/human4attack.png");
+AM.queueDownload("./img/human4run2.png");
+AM.queueDownload("./img/human4attack2.png");
+
+AM.queueDownload("./img/human5run.png");
+AM.queueDownload("./img/human5attack.png");
+AM.queueDownload("./img/human5run2.png");
+AM.queueDownload("./img/human5attack2.png");
+
 
 AM.downloadAll(function () {
 	var canvas = document.getElementById("gameWorld");
