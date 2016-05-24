@@ -72,6 +72,10 @@ AM.queueDownload("./img/tower1.png");
 AM.queueDownload("./img/tower2.png");
 AM.queueDownload("./img/tower3.png");
 
+//tree
+AM.queueDownload("./img/tree1.png");
+AM.queueDownload("./img/tree2.png");
+
 
 /*
  * This is where the game start.

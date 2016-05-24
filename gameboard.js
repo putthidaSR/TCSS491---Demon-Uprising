@@ -13,7 +13,7 @@ var GAME_CONSTANT = {
 };
 
 var BOARD_CONSTANT = {
-    MONEY: 250,
+    MONEY: 100,
     //this is used to figure out which 
     //class of tower to add when mouse is clicked
 //    TOWER_CLASSES: [],
