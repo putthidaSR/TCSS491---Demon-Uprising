@@ -3,6 +3,10 @@ AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
 AM.queueDownload("./img/human6walkright.png");
 
+this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
+    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft"),
+    			AM.getAsset("./img/human6walkright.png")));
+
 function Human6(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight) {
   //walk back
   this.animationBack = new Animation(spritesheetWalkBack, x, y, 72, 64, 9, 0.1, 9, true);
@@ -26,6 +30,12 @@ AM.queueDownload("./img/human7attackback.png");
 AM.queueDownload("./img/human7attackfront.png");
 AM.queueDownload("./img/human7attackleft.png");
 AM.queueDownload("./img/human7attackright.png");
+
+this.humanList.push(new Human7(this.game, this, AM.getAsset("./img/human7walkback.png"), 
+    			AM.getAsset("./img/human7walkfront.png"), AM.getAsset("./img/human7walkleft"),
+    			AM.getAsset("./img/human7walkright.png"), AM.getAsset("./img/human7attackback.png"), 
+    			AM.getAsset("./img/human7attackfront.png"), AM.getAsset("./img/human7attackleft"),
+    			AM.getAsset("./img/human7attackright.png")));
 
 function Human7(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight, 
             spritesheetAttackBack, spritesheetAttackFront, spritesheetAttackLeft, spritesheetAttackRight) {
