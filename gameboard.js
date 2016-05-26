@@ -10,12 +10,15 @@ var GAME_CONSTANT = {
     BLOCK_LOOP: true,
     CANVAS_WIDTH: 1000,
     CANVAS_HEIGHT: 800,
+    
+    HEALTH_WIDTH : 21,
+	HEALTH_HEIGHT : 5,
 };
 
 var BOARD_CONSTANT = {
     MONEY: 100,
-    //this is used to figure out which 
-    //class of tower to add when mouse is clicked
+//     this is used to figure out which 
+//     class of tower to add when mouse is clicked
 //    TOWER_CLASSES: [],
 //    TOWERS: [],
     TOWER_COST: [0, 25, 50 ,75],
@@ -52,6 +55,7 @@ function GameBoard(game, map) {
     this.setState(30);
     this.fireballActivated = false;
     this.lastCor;
+    this.healthWidth = 20;
 }
 
 GameBoard.prototype = new Entity();

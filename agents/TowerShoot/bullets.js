@@ -35,6 +35,10 @@ Bullet.prototype.update = function () {
             		BOARD_CONSTANT.MONEY += 5;
             		//console.log("Money = " + BOARD_CONSTANT.MONEY);
         			document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;
+            	
+                //	this.game.entities[i].HEALTH_WIDTH -= 15;
+
+                	
             	}
             	this.done = true;
             	
@@ -69,13 +73,22 @@ Bullet.prototype.draw = function() {
 };
 
 Bullet.prototype.checkCollision = function() {
-	if(this.x <= this.target.x + this.target.size &&
-			this.x + this.radius >= this.target.x &&
-			this.y <= this.target.y + this.target.size &&
-			this.y + this.radius >= this.target.y) {
+
+	var xDist = this.target.x + this.target.size - this.x; 
+	var yDist = this.target.y + this.target.size - this.y;
+	var dist = Math.sqrt(xDist*xDist+yDist*yDist);
+	
+	if(dist < 20) {
 		return true;
-		
 	}
+	
+	// if(this.x <= this.target.x + this.target.size &&
+// 			this.x + this.radius >= this.target.x &&
+// 			this.y <= this.target.y + this.target.size &&
+// 			this.y + this.radius >= this.target.y) {
+// 		return true;
+// 		
+// 	}
 	
 	return false;
 	
