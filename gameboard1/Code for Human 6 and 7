@@ -1,0 +1,55 @@
+AM.queueDownload("./img/human6walkback.png");
+AM.queueDownload("./img/human6walkfront.png");
+AM.queueDownload("./img/human6walkleft.png");
+AM.queueDownload("./img/human6walkright.png");
+
+function Human6(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight) {
+  //walk back
+  this.animationBack = new Animation(spritesheetWalkBack, x, y, 72, 64, 9, 0.1, 9, true);
+
+  //walk front
+  this.animationFront = new Animation(spritesheetWalkFront, x, y, 64, 61, 9, 0.1, 9, true);
+
+  //walk left
+  this.animationLeft = new Animation(spritesheetWalkLeft, x, y, 64, 62, 9, 0.1, 9, true);
+
+  //walk right
+  this.animationRight = new Animation(spritesheetWalkRight, x, y, 64, 54, 9, 0.1, 9, true);
+}
+
+AM.queueDownload("./img/human7walkback.png");
+AM.queueDownload("./img/human7walkfront.png");
+AM.queueDownload("./img/human7walkleft.png");
+AM.queueDownload("./img/human7walkright.png");
+
+AM.queueDownload("./img/human7attackback.png");
+AM.queueDownload("./img/human7attackfront.png");
+AM.queueDownload("./img/human7attackleft.png");
+AM.queueDownload("./img/human7attackright.png");
+
+function Human7(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight, 
+            spritesheetAttackBack, spritesheetAttackFront, spritesheetAttackLeft, spritesheetAttackRight) {
+  //walk back
+  this.animationBack = new Animation(spritesheetWalkBack, x, y, 47, 44, 4, 0.1, 4, true);
+
+  //walk front
+  this.animationFront = new Animation(spritesheetWalkFront, x, y, 47, 46, 4, 0.1, 4, true);
+
+  //walk left
+  this.animationLeft = new Animation(spritesheetWalkLeft, x, y, 47, 42, 4, 0.1, 4, true);
+
+  //walk right
+  this.animationRight = new Animation(spritesheetWalkRight, x, y, 47, 48, 4, 0.1, 4, true);
+
+  //attack back
+  this.animationAttackBack = new Animation(spritesheetAttackBack, x, y, 49, 46, 4, 0.1, 4, true);
+
+  //attack front
+  this.animationAttackFront = new Animation(spritesheetAttackFront, x, y, 49, 49, 4, 0.1, 4, true);
+
+  //attack left
+  this.animationAttackLeft = new Animation(spritesheetAttackLeft, x, y, 49, 48, 4, 0.1, 4, true);
+
+  //attack right
+  this.animationAttackRight = new Animation(spritesheetAttackRight, x, y, 48, 51, 4, 0.1, 4, true);
+}
