@@ -101,7 +101,7 @@ Human6.prototype.draw = function (ctx) {
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 2;
 		ctx.beginPath();
-		ctx.rect(this.x+20, this.y, 15, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.rect(this.x+20, this.y, 21, GAME_CONSTANT.HEALTH_HEIGHT);
 		ctx.stroke();
 
 		ctx.beginPath();

@@ -39,7 +39,7 @@ Tower.prototype.findTarget = function() {
 	//finding human target
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
-        if(ent instanceof Magician) {
+        if(ent instanceof Magician || (ent instanceof Human6)) {
             //check to see if it is within range 
             if (ent !== this && this.collideRect(ent)) {               
                 this.fire(ent);
