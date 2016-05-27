@@ -63,7 +63,7 @@ Magician.prototype.end = function() {
 			this.game.entities[i].removeFromWorld = true;
 			BOARD_CONSTANT.HEALTH -= 1;
 			document.getElementById('health').innerHTML = BOARD_CONSTANT.HEALTH;
-			
+
 			break;
 		}
 	}
@@ -90,19 +90,19 @@ Magician.prototype.change = function(dir) {
 Magician.prototype.draw = function (ctx) {
 	//console.log(this.up);
 	if(this.isALive) {
-	
-		ctx.strokeStyle = "black";
-	ctx.lineWidth = 2;
-	ctx.beginPath();
-	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
-	ctx.stroke();
-	
-	ctx.beginPath();
-	ctx.fillStyle = "yellow";
-	ctx.rect(this.x+25, this.y, this.health*7, GAME_CONSTANT.HEALTH_HEIGHT);
-	ctx.fill();
 
-	
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+		ctx.rect(this.x+25, this.y, this.health*7, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.fill();
+
+
 		if (this.up) {
 			this.upAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 		} else if(this.down) {
@@ -127,21 +127,21 @@ Magician.prototype.draw = function (ctx) {
 	//context.fillStyle='green';
 	//context.fillRect(this.x,this.y+rectWidth/3,rectWidth*this.life/(this.maxLife+addedLife),rectWidth/3);
 
-// 	ctx.strokeStyle = "black";
-// 	ctx.lineWidth = 2;
-// 	ctx.beginPath();
-// 	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
-// 	ctx.stroke();
-// 	
-// 	ctx.beginPath();
-// 	ctx.fillStyle = "yellow";
-// 	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
-// 	ctx.fill();
+//	ctx.strokeStyle = "black";
+//	ctx.lineWidth = 2;
+//	ctx.beginPath();
+//	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+//	ctx.stroke();
 
-// 	if(this.findTarget) {
-// 		console.log("********");
-// 		GAME_CONSTANT.HEALTH_WIDTH -= 5;
-// 	}
+//	ctx.beginPath();
+//	ctx.fillStyle = "yellow";
+//	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+//	ctx.fill();
+
+//	if(this.findTarget) {
+//	console.log("********");
+//	GAME_CONSTANT.HEALTH_WIDTH -= 5;
+//	}
 
 	Entity.prototype.draw.call(this);
 }

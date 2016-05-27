@@ -97,6 +97,19 @@ Human6.prototype.change = function(dir) {
 Human6.prototype.draw = function (ctx) {
 	//console.log(this.up);
 	if(this.isALive) {
+		
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.rect(this.x+20, this.y, 15, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+		ctx.rect(this.x+20, this.y, this.health*5, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.fill();
+
+		
 		if (this.up) {
 	        this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	    } else if(this.down) {
