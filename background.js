@@ -14,11 +14,15 @@ function Background(game, spritesheet, map) {
     		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
     		GAME_CONSTANT.BLOCK_LOOP)
     
-    this.tree = new Animation(AM.getAsset("./img/tree1.png"),GAME_CONSTANT.BLOCK_TREE_X, 
-    		GAME_CONSTANT.BLOCK_TREE_Y, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
+    this.tree = new Animation(AM.getAsset("./img/tree1.png"),0, 
+    		0, 30, GAME_CONSTANT.BLOCK_SIZE, 
     		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
     		GAME_CONSTANT.BLOCK_LOOP)
     
+    this.tree1 = new Animation(AM.getAsset("./img/tree1.png"),0, 
+    		30, 30, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
     //Entity.call(this, game, 350, 350);
 };
 
@@ -29,8 +33,10 @@ Background.prototype.draw = function (ctx) {
 	//set the map background
 	for(var row = 0; row < this.map.length; row++) {
 	    for(var col = 0; col < this.map[row].length; col++) {
+	    	
+
 	    	//empty space
-	        if(this.map[row][col] == " " || this.map[row][col] == "t") {
+	        if(this.map[row][col] == " " || this.map[row][col] == "t" || this.map[row][col] == "v") {
 	        	this.grass.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
@@ -40,7 +46,18 @@ Background.prototype.draw = function (ctx) {
 	        	this.road.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+	        } 
+	    	if (this.map[row][col] == "t") {
+	        	this.tree.drawFrame(this.game.clockTick, ctx, 
+	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
 	        }
+	    	if (this.map[row][col] == "v") {
+	        	this.tree1.drawFrame(this.game.clockTick, ctx, 
+	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+	        }
+	        
 	    }
 	}
 	Entity.prototype.draw.call(this);
