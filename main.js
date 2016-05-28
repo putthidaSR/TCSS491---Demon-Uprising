@@ -72,6 +72,11 @@ AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
 AM.queueDownload("./img/human6walkright.png");
 
+AM.queueDownload("./img/human9back.png");
+AM.queueDownload("./img/human9front.png");
+AM.queueDownload("./img/human9left.png");
+AM.queueDownload("./img/human9right.png");
+
 //tower
 AM.queueDownload("./img/tower1.png");
 AM.queueDownload("./img/tower2.png");
