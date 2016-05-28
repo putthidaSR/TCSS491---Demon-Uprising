@@ -57,6 +57,7 @@ Background.prototype.draw = function (ctx) {
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
 	        }
+	    	
 	        
 	    }
 	}
