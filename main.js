@@ -67,6 +67,9 @@ AM.queueDownload("./img/Game_Over.png");
 AM.queueDownload("./img/magician.png");
 AM.queueDownload("./img/magician2.png");
 
+AM.queueDownload("./img/human1left.png");
+AM.queueDownload("./img/human1right.png");
+
 AM.queueDownload("./img/human6walkback.png");
 AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
