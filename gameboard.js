@@ -142,6 +142,29 @@ GameBoard.prototype.getStart = function () {
     	y: this.startYArray[start] * GAME_CONSTANT.BLOCK_SIZE, nextDir: "a"};
 }
 
+createWave1 = function() {
+	for (var i = 0; i < 3; i++) {
+		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
+    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
+    			AM.getAsset("./img/human6walkright.png")));
+	}
+}
+
+createWave2 = function() {
+	for (var i = 0; i < 6; i++) {
+		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
+    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
+    			AM.getAsset("./img/human9right.png")));
+	}
+}
+
+createWave3 = function() {
+	for (var i = 0; i < 9; i++) {
+		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
+    			AM.getAsset("./img/human1right.png")));
+	}
+}
+
 GameBoard.prototype.setState = function (level) {
 	//checking where the starting point is
     for(var row = 0; row < this.map.length; row++) {
@@ -157,9 +180,18 @@ GameBoard.prototype.setState = function (level) {
     for(var populated = 0; populated < level; populated++) {
         this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
 			AM.getAsset("./img/magician2.png")));
-	this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-    			AM.getAsset("./img/human6walkright.png")));
+	switch (level) {
+    		case 1:
+    			createWave1();
+    			break;
+    		case 2:
+    			createWave2();
+    			break;
+    		case 3:
+    			createWave3();
+    		default:
+    			console.log(level);
+        }
     }
 }
 
