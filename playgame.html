@@ -6,18 +6,15 @@
     <meta charset="utf-8">
     
     <title>Demon Uprising</title>
-     <audio src="./sound/background.mp3" id="mp5_smg_sound" preload="auto"></audio>
+    
     <link rel="stylesheet" type="text/css" href="style.css" />
     
     <script type="text/javascript" src="./agents/entity.js"></script> 
     <script type="text/javascript" src="./agents/magician/magician.js"></script> 
     <script type="text/javascript" src="./agents/magician/magician2.js"></script> 
-    <script type="text/javascript" src="./agents/human/Human1.js"></script> 
     <script type="text/javascript" src="./agents/human/Human6.js"></script> 
-    <script type="text/javascript" src="./agents/human/Human9.js"></script>
     <script type="text/javascript" src="./agents/spell/fireball.js"></script> 
     <script type="text/javascript" src="./agents/TowerShoot/tower.js"></script>   
-    <script type="text/javascript" src="./agents/level.js"></script> 
     <script type="text/javascript" src="./gameover.js"></script>    
     <script type="text/javascript" src="./gameboard.js"></script>       
     <script type="text/javascript" src="./background.js"></script>         
@@ -136,7 +133,7 @@
 	
 	<div class = "fireballbox style = 'width: 80px;'>
 	
-	<div class="boxed" style='background-color: black;'>
+	<div class="boxed" style='background-color: black;' onclick='changeSpell(1);'>
 		
 		<div class="grow" align="middle">
 			<img src="./img/fireballicon.png" alt="Fireball" id="fireball" style="width:80px;height:80px;">
