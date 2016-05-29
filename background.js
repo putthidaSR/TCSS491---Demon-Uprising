@@ -20,9 +20,37 @@ function Background(game, spritesheet, map) {
     		GAME_CONSTANT.BLOCK_LOOP)
     
     this.tree1 = new Animation(AM.getAsset("./img/tree1.png"),0, 
+    		GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    
+    this.treeA = new Animation(AM.getAsset("./img/tree2.png"),0, 
+    		0, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    
+    this.treeB = new Animation(AM.getAsset("./img/tree2.png"),0, 
+    		GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    
+    this.treeC = new Animation(AM.getAsset("./img/tree3.png"),0, 
+    		0, 30, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    this.treeI = new Animation(AM.getAsset("./img/tree3.png"),0, 
     		30, 30, GAME_CONSTANT.BLOCK_SIZE, 
     		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
     		GAME_CONSTANT.BLOCK_LOOP)
+    this.treeH = new Animation(AM.getAsset("./img/tree3.png"),0, 
+    		30, 60, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    this.treeF = new Animation(AM.getAsset("./img/tree3.png"),0, 
+    		60, 60, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    
     //Entity.call(this, game, 350, 350);
 };
 
@@ -36,7 +64,9 @@ Background.prototype.draw = function (ctx) {
 	    	
 
 	    	//empty space
-	        if(this.map[row][col] == " " || this.map[row][col] == "t" || this.map[row][col] == "v") {
+	        if(this.map[row][col] == " " || this.map[row][col] == "t" || this.map[row][col] == "v"
+	        	|| this.map[row][col] == "a" || this.map[row][col] == "b" || this.map[row][col] == "c" || this.map[row][col] == "i"
+	        		|| this.map[row][col] == "h" || this.map[row][col] == "f") {
 	        	this.grass.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
@@ -51,12 +81,45 @@ Background.prototype.draw = function (ctx) {
 	        	this.tree.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+	        	
 	        }
 	    	if (this.map[row][col] == "v") {
 	        	this.tree1.drawFrame(this.game.clockTick, ctx, 
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
 	        }
+	    	
+	    	if (this.map[row][col] == "a") {
+	        	this.treeA.drawFrame(this.game.clockTick, ctx, 
+	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+	        	
+	        }
+	    	if (this.map[row][col] == "b") {
+	        	this.treeB.drawFrame(this.game.clockTick, ctx, 
+	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+	        }
+//	    	if (this.map[row][col] == "c") {
+//	        	this.treeC.drawFrame(this.game.clockTick, ctx, 
+//	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+//	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+//	        }
+//	    	if (this.map[row][col] == "i") {
+//	        	this.treeI.drawFrame(this.game.clockTick, ctx, 
+//	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+//	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+//	        }
+//	    	if (this.map[row][col] == "h") {
+//	        	this.treeH.drawFrame(this.game.clockTick, ctx, 
+//	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+//	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+//	        }
+//	    	if (this.map[row][col] == "f") {
+//	        	this.treeF.drawFrame(this.game.clockTick, ctx, 
+//	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
+//	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
+//	        }
 	    	
 	        
 	    }

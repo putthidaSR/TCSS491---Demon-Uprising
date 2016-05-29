@@ -4,18 +4,18 @@ var game_over = false;
 
 var MAP = {
 	FIRSTMAP: [
-"     sssss                        ",
-"     ddddd                        ",
-"     ddddd                        ",
+"     sssss             t          ",
+"     ddddd       a     v          ",
+"     ddddd       b                ",
 "     ddddd                        ",
 "     ddddd                        ",
 "     ddddrrrrrrrrrrrrrrrd         ",
 "     ddrrrrrrrrrrrrrrrddd         ",
 "     rrrrrrrrrrrrrrrddddd         ",
-"                    ddddd         ",
-"                    ddddd         ",
-"                    ddddd         ",
-"                    ddddd         ",
+"                    ddddd    ci   ",
+"                    ddddd    hf   ",
+"           a        ddddd         ",
+"           b        ddddd         ",
 "   t                ddddd         ",
 "   v                ddddd         ",
 "                    ddddd         ",
@@ -24,9 +24,9 @@ var MAP = {
 "          dddddllllllllll         ",
 "          ddddd                   ",
 "          ddddd                   ",
-"          ddddd                   ",
-"          ddddd                   ",
-"          eeeee                   ",
+"          ddddd             t     ",
+"   t      ddddd             v     ",
+"   v      eeeee                   ",
 "          eeeee                   ",
     ],
 };
@@ -88,7 +88,7 @@ AM.queueDownload("./img/tower3.png");
 //tree
 AM.queueDownload("./img/tree1.png");
 AM.queueDownload("./img/tree2.png");
-
+AM.queueDownload("./img/tree3.png");
 
 /*
  * This is where the game start.
