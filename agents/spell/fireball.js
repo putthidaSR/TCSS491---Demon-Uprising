@@ -1,58 +1,61 @@
-function Spell(game, spritesheet, x, y) {
-    this.animation = new Animation(spritesheet, 210, 7, 26, 63, 1, 0.30, 8, true);
-    //this.oppAnimation = new Animation(spritesheet, 9, 252, 63, 60, 8, 0.30, 8, true);
-    //this.xOriginal = 400;
-    //this.yOriginal = 350;
-    //this.xPosition = 400;
-    //this.yPosition = 350;
-    this.ctx = game.ctx;
-    this.fire = false;
+function Spell(game, board, x, y, id) {
+    this.spell = [new Animation(AM.getAsset("./img/explosion_transparent.png"), 0 , 0, 64, 64, 5, 0.05, 23, false)];
+    this.id = id - 1;
+    this.board = board;
     this.game = game;
-    this.x = x;
-    this.y = y;
+    this.x = x - 32;
+    this.y = y - 32;
+    this.damage = id * 5;
+    this.animation = this.spell[this.id];
+    this.radius = 17;
+    this.done = false;
+    this.clocktick = 0;
     Entity.call(this, game, this.x, this.y);//position where it start
 }
 
 Spell.prototype = new Entity();
-Spell.prototype.constructor = Magician;
+Spell.prototype.constructor = Spell;
+
+Spell.prototype.collideRect = function (other) {
+	return distance(this, other) < this.radius;
+};
 
 Spell.prototype.update = function () {
-	if (this.game.click) {
-		this.xPosition = this.game.position.x - (this.game.position.x % 10);
-		this.yPosition = this.game.position.y - (this.game.position.y % 10);
-		//console.log(this.yOriginal);
-		this.xOriginal = this.xPosition;
-	    this.yOriginal = 0;
-		this.fire = true;
-	}
-	if(this.xOriginal < this.xPosition) {
-		this.x = this.xOriginal;
-		this.xOriginal += 5;
-	}
-	if(this.xOriginal > this.xPosition){
-		this.x = this.xOriginal;
-		this.xOriginal -= 5;
-	} 
-	if(this.yOriginal < this.yPosition) {
-		this.y = this.yOriginal;
-		this.yOriginal += 5;
-	}
-	if(this.yOriginal > this.yPosition){
-		this.y = this.yOriginal;
-		this.yOriginal -= 5;
-	} 
-	if(this.xOriginal == this.xPosition && this.yOriginal == this.yPosition) {
-		this.fire = false;
-		
-	    
-	}
-	
+	for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        //remove the spell once it is finish
+        if(ent == this && this.done) {
+        	this.game.entities[i].removeFromWorld = true;
+            break;
+        }
+        //check the target
+        if(ent instanceof Magician) {
+            //check to see if it is within range 
+            if(this.collideRect(ent)) {
+            	ent.health -= this.damage;
+            	if(ent.health <= 0) {
+            		ent.isAlive = false;
+            		this.game.entities[i].removeFromWorld = true;
+            		BOARD_CONSTANT.MONEY += 5;
+        			document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;	
+            	}
+//            	this.done = true;           	
+            }
+        }
+    }
+    if(this.clocktick > 50) {
+        this.done = true;
+    }
+	this.clocktick++;
     Entity.prototype.update.call(this);
 }
 
-Spell.prototype.draw = function () {
-	if(this.fire) {
-		this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+Spell.prototype.draw = function (ctx) {
+	switch(this.id) {
+		case 0: this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1); break;
+		case 1: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 7, this.y - 50, 0.7); break;
+		case 2: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 11, this.y - 50, 0.2); break;
+		default: console.log("spell");
 	}
     Entity.prototype.draw.call(this);
 }
