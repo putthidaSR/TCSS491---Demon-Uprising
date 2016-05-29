@@ -52,12 +52,16 @@ GameBoard.prototype.update = function () {
 	            document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;
 	            BOARD_CONSTANT.CURRENTTOWER = 0;
 	        }
-    	}
+    	} else if(BOARD_CONSTANT.CURRENTSPELL > 0) {
+            //add the spell to the entity
+            console.log("spell");
+            this.game.addEntity(new Spell(this.game, this, this.game.position.x, this.game.position.y, BOARD_CONSTANT.CURRENTSPELL));
+        }
         this.game.click = false;
     }
         
     //adding enemy
-    console.log("humanList " + this.humanList.length);
+    //console.log("humanList " + this.humanList.length);
     if(this.clockTick > Math.random() * 3000 + 100 && this.humanList.length > 0) {
     	this.game.addEntity(this.humanList.pop());
         this.clockTick = 0;
@@ -175,7 +179,7 @@ GameBoard.prototype.resetMap = function (x, y, nextDir) {
 GameBoard.prototype.getNextStep = function (x, y, nextDir) {
     var xposition = x / GAME_CONSTANT.BLOCK_SIZE;
     var yposition = y / GAME_CONSTANT.BLOCK_SIZE; 
-    console.log("x " + xposition + "y " + yposition);
+    //console.log("x " + xposition + "y " + yposition);
     if(xposition == 0) {
     	xposition++;
     } else if (yposition == 0) {
@@ -215,7 +219,7 @@ GameBoard.prototype.towerAllowed = function(x,y) {
 }
 
 GameBoard.prototype.createWave1 = function() {
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 30; i++) {
         this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
 			AM.getAsset("./img/magician2.png")));
 		//this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
