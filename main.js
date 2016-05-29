@@ -145,6 +145,8 @@ var BOARD_CONSTANT = {
     TOWER_RANGE: [0, 100, 150 ,200],
     //tower type selector.
     CURRENTTOWER: 0,
+    //current spell
+    CURRENTSPELL: 0,
     //User's health
     HEALTH: 10,
     //current level
@@ -152,7 +154,7 @@ var BOARD_CONSTANT = {
     //gameover?
     GAME_OVER: false,
     //current map
-    CURRENT_MAP: MAP.FIRSTMAP,
+    //CURRENT_MAP: MAP.FIRSTMAP,
     //when magician died
     FINISH: false,
 };
@@ -168,13 +170,19 @@ var BOARD_CONSTANT = {
 
 function changeTower(n) {
 	BOARD_CONSTANT.CURRENTTOWER = n;
+    BOARD_CONSTANT.CURRENTSPELL = 0;
+}
+
+function changeSpell(n) {
+	BOARD_CONSTANT.CURRENTSPELL = n;
+    BOARD_CONSTANT.CURRENTTOWER = 0;
 }
 
 /*
  * Downloadn the picture from the file.
  */
 //attack
-AM.queueDownload("./img/fireball_0.png");
+AM.queueDownload("./img/explosion_transparent.png");
 //AM.queueDownload("./img/explosion.png");
 //AM.queueDownload("./img/snowball.png");
 //AM.queueDownload("./img/light.png");
@@ -220,7 +228,7 @@ AM.queueDownload("./img/tree2.png");
     
     gameEngine.addEntity(new Background(gameEngine));
 	gameEngine.addEntity(new GameBoard(gameEngine));   
-    gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
+    //gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
     gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
 
 	console.log("All Done!");
