@@ -16,14 +16,23 @@ function Magician(game, board, spritesheet, spritesheet2) {
 	this.nextMove = board.getStart();
 	//this.speed = 50;
 	this.clocktick = 0;
-	this.xPosition = this.nextMove.x - 24;
-	this.yPosition = this.nextMove.y - 16;
+    if(this.nextMove.x == 0) {
+        this.xPosition = this.nextMove.x + 16;
+        this.yPosition = this.nextMove.y - 46;
+    } else if(this.nextMove.x == 990){
+        this.xPosition = this.nextMove.x - 42;
+        this.yPosition = this.nextMove.y - 46;
+    } else {
+        this.xPosition = this.nextMove.x - 16;
+        this.yPosition = this.nextMove.y - 16;
+    }
+    console.log("this.x " + this.nextMove.x + "this.y " + this.nextMove.y);
+	
 	this.x = this.xPosition;
 	this.y = this.yPosition;
 	this.health = 3;
-	this.size = 32;
 	this.isALive = true;
-	console.log("dir: " + this.nextMove.y);
+	//console.log("dir: " + this.nextMove.y);
 	Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
 
@@ -31,13 +40,13 @@ Magician.prototype = new Entity();
 Magician.prototype.constructor = Magician;
 
 Magician.prototype.update = function () {
-	if(this.clocktick > GAME_CONSTANT.BLOCK_SIZE) {
+	if(this.clocktick > GAME_CONSTANT.BLOCK_SIZE - 1) {
 		this.clocktick = 0;
 		//console.log("movex " + this.yPosition);
-		//console.log("x " + this.y);
+		//console.log("thi.x " + this.x + "this.y " + this.y);
 		this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
 		this.xPosition = this.nextMove.x - 16;
-		this.yPosition = this.nextMove.y;
+		this.yPosition = this.nextMove.y - 16;
 		this.change(this.nextMove.nextDir);
 	}
 	//movement
@@ -117,31 +126,6 @@ Magician.prototype.draw = function (ctx) {
 			this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 		}
 	}
-
-	//add health bar
-	//context.beginPath();
-	//context.fillStyle = this.color;
-	//context.fillRect(this.x+15,this.y-15,rectWidth+10,rectWidth-7);
-	//life bar
-	//this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-	//context.fillStyle='green';
-	//context.fillRect(this.x,this.y+rectWidth/3,rectWidth*this.life/(this.maxLife+addedLife),rectWidth/3);
-
-//	ctx.strokeStyle = "black";
-//	ctx.lineWidth = 2;
-//	ctx.beginPath();
-//	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
-//	ctx.stroke();
-
-//	ctx.beginPath();
-//	ctx.fillStyle = "yellow";
-//	ctx.rect(this.x+25, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
-//	ctx.fill();
-
-//	if(this.findTarget) {
-//	console.log("********");
-//	GAME_CONSTANT.HEALTH_WIDTH -= 5;
-//	}
 
 	Entity.prototype.draw.call(this);
 }
