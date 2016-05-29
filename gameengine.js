@@ -123,7 +123,7 @@ GameEngine.prototype.update = function () {
 }
 
 GameEngine.prototype.loop = function () {
-	if(!game_over) {
+	if(!BOARD_CONSTANT.GAME_OVER || !BOARD_CONSTANT.FINISH) {
 	    this.clockTick = this.timer.tick();
 	    this.update();
 	    this.draw();
