@@ -1,3 +1,4 @@
+//constant for the game picture
 var GAME_CONSTANT = {
     BLOCK_SIZE : 30,
     BLOCK_GRASS_X : 185,
@@ -15,47 +16,16 @@ var GAME_CONSTANT = {
 	HEALTH_HEIGHT : 5,
 };
 
-var BOARD_CONSTANT = {
-    MONEY: 100,
-//     this is used to figure out which 
-//     class of tower to add when mouse is clicked
-//    TOWER_CLASSES: [],
-//    TOWERS: [],
-    TOWER_COST: [0, 25, 50 ,75],
-    //tower type selector.
-    CURRENTTOWER: 0,
-    HEALTH: 10,
-    /*//FPS = 30,
-    //baseSpeed = 4*rectWidth/FPS,
-    mouse, //mouse x and y for drawing range
-    //borders for attacker's path
-    leftBorder = maxWidth/6,
-    rightBorder = maxWidth*5/6,
-    //vertical borders:
-    firstBorder = maxWidth/4,
-    secondBorder = maxWidth/2,
-    thirdBorder = maxWidth*3/4,
-    //points/statistics
-    attackerPoints = 0,
-    stopped = 0,
-    //counter for when to add enemy units
-    addEnemyTimer = 60,
-    money = 250,
-    moneyIncrement = 5;*/
-};
-
-function GameBoard(game, map) {
+function GameBoard(game) {
     this.game = game;
-    this.map = map;
-    this.removeFromWorld = false;
+    this.map = MAP.FIRSTMAP;
     this.startXArray = [];
     this.startYArray = [];
     this.humanList = [];
     this.clockTick = 0;
-    this.setState(30);
+    this.setState(BOARD_CONSTANT.LEVEL);
     this.fireballActivated = false;
     this.lastCor;
-    this.healthWidth = 20;
 }
 
 GameBoard.prototype = new Entity();
@@ -69,7 +39,7 @@ GameBoard.prototype.update = function () {
     	var xPos = Math.floor(this.game.position.x / GAME_CONSTANT.BLOCK_SIZE);
         var yPos = Math.floor(this.game.position.y / GAME_CONSTANT.BLOCK_SIZE);
     	if(BOARD_CONSTANT.CURRENTTOWER > 0) {
-    		
+    		//check to see if the tower is allowed on the map
 	        if(this.towerAllowed(xPos, yPos)) {
 	        	//change the map to tower
 	        	MAP.FIRSTMAP[yPos] = MAP.FIRSTMAP[yPos].substring(0, xPos) + "t" 
@@ -78,7 +48,7 @@ GameBoard.prototype.update = function () {
 	        	this.game.addEntity(new Tower(this.game, this, xPos, yPos, BOARD_CONSTANT.CURRENTTOWER));
 	        	//money subtraction
 	            BOARD_CONSTANT.MONEY -= BOARD_CONSTANT.TOWER_COST[BOARD_CONSTANT.CURRENTTOWER];
-	          //update money when adding tower
+                //update money when adding tower
 	            document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;
 	            BOARD_CONSTANT.CURRENTTOWER = 0;
 	        }
@@ -87,28 +57,39 @@ GameBoard.prototype.update = function () {
     }
         
     //adding enemy
+    console.log("humanList " + this.humanList.length);
     if(this.clockTick > Math.random() * 3000 + 100 && this.humanList.length > 0) {
     	this.game.addEntity(this.humanList.pop());
         this.clockTick = 0;
     }
     
-    
-    //fireball
-    /*
-    if(this.game.click) {
-    	this.fireballActivated = true;
-        console.log("fireball2");
-    } else if(this.game.two) {
-    	this.fireballActivated = false;
+    //check if there are anymore human left on the board
+    var check = true;
+    for(var i =0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if(ent instanceof Magician) {
+            check = false;
+        }
     }
-    if(this.fireballActivated) {
-        var position = this.game.position;
-        //console.log(position);
-        this.game.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png"), 0, 0));
-        this.game.click = false;
-    }*/
+    
+    //level up if there is no more human left on the board
+    if(check && this.humanList.length < 1) {
+        //console.log("level up2");
+        if(BOARD_CONSTANT.LEVEL < 5){
+            //console.log("level up");
+            BOARD_CONSTANT.LEVEL++;
+            //update money when adding tower
+            BOARD_CONSTANT.MONEY += 75 * BOARD_CONSTANT.LEVEL;
+            document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;
+            this.resetMap();
+            this.setState(BOARD_CONSTANT.LEVEL);
+        } else {
+            //win the game
+        }
+    }
 }
 
+//drawing the tower range for new tower to be placed
 GameBoard.prototype.draw = function (ctx) {
 	if(this.game.mouse != null) {
 		this.lastCor = this.game.mouse;
@@ -116,25 +97,26 @@ GameBoard.prototype.draw = function (ctx) {
 	if(BOARD_CONSTANT.CURRENTTOWER > 0 && this.lastCor != null) {
 		var xPos = Math.floor(this.lastCor.x / GAME_CONSTANT.BLOCK_SIZE);
         var yPos = Math.floor(this.lastCor.y / GAME_CONSTANT.BLOCK_SIZE);
-		//console.log(this.map[yPos][xPos]);
 		if(this.map[yPos][xPos] == " ") {
 			ctx.beginPath();
 	        ctx.fillStyle = "rgba(155, 155, 155, 0.55)";
 	        ctx.arc(this.lastCor.x, this.lastCor.y, 
-	        		BOARD_CONSTANT.TOWER_COST[BOARD_CONSTANT.CURRENTTOWER] * 3, 0, Math.PI * 2, false);
+	        		BOARD_CONSTANT.TOWER_RANGE[BOARD_CONSTANT.CURRENTTOWER], 0, Math.PI * 2, false);
 	        ctx.fill();
 	        ctx.closePath();
+        //you can't place the tower
 		} else {
 			ctx.beginPath();
 	        ctx.fillStyle = "rgba(255, 0, 0, 0.55)";
 	        ctx.arc(this.lastCor.x, this.lastCor.y, 
-	        		BOARD_CONSTANT.TOWER_COST[BOARD_CONSTANT.CURRENTTOWER] * 3, 0, Math.PI * 2, false);
+	        		BOARD_CONSTANT.TOWER_RANGE[BOARD_CONSTANT.CURRENTTOWER], 0, Math.PI * 2, false);
 	        ctx.fill();
 	        ctx.closePath();
 		}
 	}
 }
 
+//get the starting position for human
 GameBoard.prototype.getStart = function () {
 	//getting the starting point of the human
     var start = Math.floor(Math.random() * this.startXArray.length);
@@ -142,29 +124,7 @@ GameBoard.prototype.getStart = function () {
     	y: this.startYArray[start] * GAME_CONSTANT.BLOCK_SIZE, nextDir: "a"};
 }
 
-createWave1 = function() {
-	for (var i = 0; i < 3; i++) {
-		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-    			AM.getAsset("./img/human6walkright.png")));
-	}
-}
-
-createWave2 = function() {
-	for (var i = 0; i < 6; i++) {
-		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
-    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
-    			AM.getAsset("./img/human9right.png")));
-	}
-}
-
-createWave3 = function() {
-	for (var i = 0; i < 9; i++) {
-		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
-    			AM.getAsset("./img/human1right.png")));
-	}
-}
-
+//set the starting position and human for each level
 GameBoard.prototype.setState = function (level) {
 	//checking where the starting point is
     for(var row = 0; row < this.map.length; row++) {
@@ -172,37 +132,55 @@ GameBoard.prototype.setState = function (level) {
 	        if(this.map[row][col] == "s") {
                 this.startXArray.push(col);
                 this.startYArray.push(row);
-	        } else if(this.map[row][col] == "r" || this.map[row][col] == "s" || this.map[row][col] == "w") {
+            //adding the magician
+	        } else if(this.map[row][col] == "m") {
+                this.game.addEntity(new Magician2(this.game, AM.getAsset("./img/magician.png"), 
+                    AM.getAsset("./img/magician2.png"), col * GAME_CONSTANT.BLOCK_SIZE, row * GAME_CONSTANT.BLOCK_SIZE));
 	        }
 	    }
 	}
+
     //set how many human are spawning for each level
-    for(var populated = 0; populated < level; populated++) {
-        this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
-			AM.getAsset("./img/magician2.png")));
-	switch (level) {
-    		case 1:
-    			createWave1();
-    			break;
-    		case 2:
-    			createWave2();
-    			break;
-    		case 3:
-    			createWave3();
-    		default:
-    			console.log(level);
-        }
+    switch (level) {
+        case 1: this.createWave1(); break;
+        case 2: this.createWave2(); break;
+        case 3: this.createWave3(); break;
+        case 4: this.createWave4(); break;
+        case 5: this.createWave5(); break;
+        default:
+            console.log("no human");
     }
 }
 
+GameBoard.prototype.resetMap = function (x, y, nextDir) {
+    for(var i =0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if(ent instanceof Tower || ent instanceof Magician2) {
+            this.game.entities[i].removeFromWorld = true;
+        }
+    }
+    this.startXArray.splice(0,this.startXArray.length)
+    this.startYArray.splice(0,this.startYArray.length)
+    switch(BOARD_CONSTANT.LEVEL) {
+        case 1: this.map = MAP.FIRSTMAP; break;
+        case 2: this.map = MAP.SECONDMAP; break;
+        case 3: this.map = MAP.THIRDMAP; break;
+        case 4: this.map = MAP.FOURTHMAP; break;
+        case 5: this.map = MAP.FIFTHMAP; break;
+        default: console.log("no map");
+    }
+}
+
+//get the next step for the human to walk through
 GameBoard.prototype.getNextStep = function (x, y, nextDir) {
     var xposition = x / GAME_CONSTANT.BLOCK_SIZE;
     var yposition = y / GAME_CONSTANT.BLOCK_SIZE; 
+    console.log("x " + xposition + "y " + yposition);
     if(xposition == 0) {
     	xposition++;
     } else if (yposition == 0) {
     	yposition++;
-    } else if(xposition == GAME_CONSTANT.CANVAS_WIDTH) {
+    } else if(xposition == 33) {
     	xposition--;
     }
     switch(nextDir) {
@@ -213,8 +191,6 @@ GameBoard.prototype.getNextStep = function (x, y, nextDir) {
 		case "a": break;
 		default: console.log(nextDir);
     }
-    //console.log("dir: " + xposition + " y: " + yposition);
-    //console.log("dir: " + this.map[yposition][xposition]);
     return {x: xposition * GAME_CONSTANT.BLOCK_SIZE, y: yposition * GAME_CONSTANT.BLOCK_SIZE, 
     	nextDir: this.map[yposition][xposition]};
 }
@@ -223,11 +199,12 @@ GameBoard.prototype.getNextStep = function (x, y, nextDir) {
 //starts at top of page
 GameBoard.prototype.towerAllowed = function(x,y) {
     var allowed = true;
-    //console.log("x " + x + " y: " + y);
+    //checking to see if the coordinate is bigger than the game board
     if(x >= 34 || y >= 24) {
     	return false;
     }
-	if (BOARD_CONSTANT.MONEY < BOARD_CONSTANT.TOWER_COST[BOARD_CONSTANT.CURRENTTOWER]) { //can afford tower?
+    //checking if the player can afford tower
+	if (BOARD_CONSTANT.MONEY < BOARD_CONSTANT.TOWER_COST[BOARD_CONSTANT.CURRENTTOWER]) { 
         allowed = false;
     } else {      
         if(this.map[y][x] != " ") {
@@ -235,4 +212,56 @@ GameBoard.prototype.towerAllowed = function(x,y) {
         }
     }
 	return allowed;
+}
+
+GameBoard.prototype.createWave1 = function() {
+	for (var i = 0; i < 3; i++) {
+        this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
+			AM.getAsset("./img/magician2.png")));
+		//this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
+    	//		AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
+    	//		AM.getAsset("./img/human6walkright.png")));
+	}
+    console.log("1");
+}
+
+GameBoard.prototype.createWave2 = function() {
+	for (var i = 0; i < 3; i++) {
+        this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
+			AM.getAsset("./img/magician2.png")));
+		//this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
+    	//		AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
+    	//		AM.getAsset("./img/human9right.png")));
+	}
+    console.log("2");
+}
+
+GameBoard.prototype.createWave3 = function() {
+	for (var i = 0; i < 3; i++) {
+		this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
+			AM.getAsset("./img/magician2.png")));
+        //this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
+    		//	AM.getAsset("./img/human1right.png")));
+	}
+    console.log("3");
+}
+
+GameBoard.prototype.createWave4 = function() {
+	for (var i = 0; i < 3; i++) {
+		this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
+			AM.getAsset("./img/magician2.png")));
+            //this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
+    			//AM.getAsset("./img/human1right.png")));
+	}
+    console.log("4");
+}
+
+GameBoard.prototype.createWave5 = function() {
+	for (var i = 0; i < 3; i++) {
+		this.humanList.push(new Magician(this.game, this, AM.getAsset("./img/magician.png"), 
+			AM.getAsset("./img/magician2.png")));
+            //this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
+    			//AM.getAsset("./img/human1right.png")));
+	}
+    console.log("5");
 }
