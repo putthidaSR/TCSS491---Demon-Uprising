@@ -27,7 +27,7 @@ function Magician(game, board, spritesheet, spritesheet2) {
         this.yPosition = this.nextMove.y - 16;
     }
     console.log("this.x " + this.nextMove.x + "this.y " + this.nextMove.y);
-	
+	this.size=32;
 	this.x = this.xPosition;
 	this.y = this.yPosition;
 	this.health = 3;
