@@ -16,16 +16,13 @@ function GameEngine() {
     this.surfaceHeight = null;
     //extra for jump
     this.showOutlines = false;
-    //this.click = null;
-    //this.mouse = null;
-    //this.wheel = null;
 }
 
 GameEngine.prototype.init = function (ctx) {
     this.ctx = ctx;
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
-    this.startInput();//input for jump
+    this.startInput();
     this.timer = new Timer();
     console.log('game initialized');
 }
@@ -43,20 +40,14 @@ GameEngine.prototype.start = function () {
 GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
+    //getting the position of where the mouse is
     var getXandY = function (e) {
         var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
         var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-
-        //if (x < 1024) {
-           // x = Math.floor(x / 32);
-           // y = Math.floor(y / 32);
-        //}
-
         return { x: x, y: y };
     }
-    //up
+    //getting the key pressed
     this.ctx.canvas.addEventListener("keypress", function (e) {
-        //if (e.code === 'KeyW') that.w = true;
     	switch(e.code) {
     		case 'Space': that.space = true; break;
     		case 'KeyW': that.w = true; break;
@@ -68,14 +59,11 @@ GameEngine.prototype.startInput = function () {
     		default: console.log("something else");
     	}
         console.log(e);
-        //console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
         e.preventDefault();
     }, false);
     this.ctx.canvas.addEventListener("click", function (e) {
         that.position = getXandY(e);
         that.click = true;
-        //console.log(that.click);
-        //console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
@@ -83,10 +71,7 @@ GameEngine.prototype.startInput = function () {
     	if(newCor != null) {
     		that.mouse = newCor;
     	}
-        //console.log(that.mouse);
     }, false);
-
-
     console.log('Input started');
 }
 
