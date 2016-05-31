@@ -1,16 +1,16 @@
 //Human9
 function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight) {
-  //walk back
-  this.animationBack = new Animation(spritesheetWalkBack, 0, 0, 125, 78, 5, 0.15, 5, true);
+	//walk back
+	this.animationBack = new Animation(spritesheetWalkBack, 0, 0, 125, 78, 5, 0.15, 5, true);
 
-  //walk front
-  this.animationFront = new Animation(spritesheetWalkFront, 0, 0, 80, 75, 5, 0.15, 5, true);
+	//walk front
+	this.animationFront = new Animation(spritesheetWalkFront, 0, 0, 80, 75, 5, 0.15, 5, true);
 
-  //walk left
-  this.animationLeft = new Animation(spritesheetWalkLeft, 0, 0, 80, 75, 5, 0.15, 5, true);
+	//walk left
+	this.animationLeft = new Animation(spritesheetWalkLeft, 0, 0, 80, 75, 5, 0.15, 5, true);
 
-  //walk right
-  this.animationRight = new Animation(spritesheetWalkRight, 0, 0, 80, 75, 5, 0.15, 5, true);
+	//walk right
+	this.animationRight = new Animation(spritesheetWalkRight, 0, 0, 80, 75, 5, 0.15, 5, true);
   
     this.up = false;
     this.down = false;
@@ -20,16 +20,26 @@ function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesh
     this.move = false;
     this.board = board;
     this.nextMove = board.getStart();
-    //this.speed = 50;
     this.clocktick = 0;
-    this.xPosition = this.nextMove.x - 24;
-    this.yPosition = this.nextMove.y - 16;
-    this.x = this.xPosition;
-    this.y = this.yPosition;
-    this.health = 5;
-    this.size = 32;
+    if(this.nextMove.x == 0) {
+        this.xPosition = this.nextMove.x + 16;
+        this.yPosition = this.nextMove.y - 30;
+    } else if(this.nextMove.x == 990){
+        this.xPosition = this.nextMove.x - 42;
+        this.yPosition = this.nextMove.y - 30;
+    } else {
+    	this.xPosition = this.nextMove.x - 20;
+        this.yPosition = this.nextMove.y;
+    }
+    //how big the size of this entity is for collision with bullet
+	this.size = 32;
+	//current position of the magician
+	this.x = this.xPosition;
+	this.y = this.yPosition;
+	//health of the magician 
+	this.health = 5 * BOARD_CONSTANT.LEVEL;
+	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL;
     this.isALive = true;
-    console.log("dir: " + this.nextMove.y);
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
 
@@ -38,25 +48,21 @@ Human9.prototype.constructor = Human9;
 
 Human9.prototype.update = function () {
 	if(this.clocktick >= GAME_CONSTANT.BLOCK_SIZE) {
-	this.clocktick = 0;
-	//console.log("movex " + this.yPosition);
-	//console.log("x " + this.y);
+		this.clocktick = 0;
 		this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
-		this.xPosition = this.nextMove.x - 64;
-	    this.yPosition = this.nextMove.y + 16;
 		this.change(this.nextMove.nextDir);
 	}
 	//movement
 	switch(this.nextMove.nextDir) {
-	case "u": this.y-= 0.5; break;
-	case "d": this.y+= 0.5; break;
-	case "l": this.x-=0.5; break;
-	case "r": this.x+=0.5; break;
+	case "u": this.y--; break;
+	case "d": this.y++; break;
+	case "l": this.x--; break;
+	case "r": this.x++; break;
 	case "a": break;
 	case "e": this.end(); break;
 	default: console.log(this.nextMove.nextDir);
 }
-	this.clocktick += 0.5;
+	this.clocktick ++;
     Entity.prototype.update.call(this);
 }
 
@@ -97,6 +103,19 @@ Human9.prototype.change = function(dir) {
 Human9.prototype.draw = function (ctx) {
 	//console.log(this.up);
 	if(this.isALive) {
+		//health
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH * (this.health/this.maxHealth), 
+				GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.fill();
+		
 		if (this.up) {
 	        this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
 	    } else if(this.down) {
