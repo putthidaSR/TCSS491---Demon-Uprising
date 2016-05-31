@@ -209,15 +209,24 @@ AM.queueDownload("./img/Game_Over.png");
 AM.queueDownload("./img/magician.png");
 AM.queueDownload("./img/magician2.png");
 
+AM.queueDownload("./img/human1left.png");
+AM.queueDownload("./img/human1right.png");
+
 AM.queueDownload("./img/human6walkback.png");
 AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
 AM.queueDownload("./img/human6walkright.png");
 
+AM.queueDownload("./img/human9back.png");
+AM.queueDownload("./img/human9front.png");
+AM.queueDownload("./img/human9left.png");
+AM.queueDownload("./img/human9right.png");
+
 //tower
 AM.queueDownload("./img/tower1.png");
 AM.queueDownload("./img/tower2.png");
 AM.queueDownload("./img/tower3.png");
+AM.queueDownload("./img/arrow1.png");
 
 //tree
 AM.queueDownload("./img/tree1.png");
