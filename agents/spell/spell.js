@@ -1,14 +1,23 @@
 function Spell(game, board, x, y, id) {
-    this.spell = [new Animation(AM.getAsset("./img/explosion_transparent.png"), 0 , 0, 64, 64, 5, 0.05, 23, false)];
+    this.spell = [new Animation(AM.getAsset("./img/explosion_transparent.png"), 
+    		0 , 0, 64, 64, 5, 0.05, 23, false),
+    		new Animation(AM.getAsset("./img/snowball.png"), 
+			0 , 0, 192, 192, 5, 0.05, 35, false),
+			new Animation(AM.getAsset("./img/light.png"), 
+    		0 , 0, 192, 192, 5, 0.05, 20, false)];
     this.id = id - 1;
     this.board = board;
     this.game = game;
-    this.x = x - 32;
-    this.y = y - 32;
-    this.damage = id * 5;
+    this.x = x;
+    this.y = y;
+    this.damage = 5;
     this.animation = this.spell[this.id];
-    this.radius = 17;
+    //range of the spell
+    this.radius = 50;
+    //checking when the animation is finished
     this.done = false;
+    //checking if it hits one of them
+    this.hit = false;
     this.clocktick = 0;
     Entity.call(this, game, this.x, this.y);//position where it start
 }
@@ -25,11 +34,12 @@ Spell.prototype.update = function () {
         var ent = this.game.entities[i];
         //remove the spell once it is finish
         if(ent == this && this.done) {
+        	BOARD_CONSTANT.SPELL_ACTIVATED = false;
         	this.game.entities[i].removeFromWorld = true;
             break;
         }
         //check the target
-        if(ent instanceof Magician) {
+        if(!this.hit && ent instanceof Magician2) {
             //check to see if it is within range 
             if(this.collideRect(ent)) {
             	ent.health -= this.damage;
@@ -39,6 +49,7 @@ Spell.prototype.update = function () {
             		BOARD_CONSTANT.MONEY += 5;
         			document.getElementById('money').innerHTML = BOARD_CONSTANT.MONEY;	
             	}
+            	this.hit = true;
 //            	this.done = true;           	
             }
         }
@@ -52,9 +63,9 @@ Spell.prototype.update = function () {
 
 Spell.prototype.draw = function (ctx) {
 	switch(this.id) {
-		case 0: this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1); break;
-		case 1: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 7, this.y - 50, 0.7); break;
-		case 2: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 11, this.y - 50, 0.2); break;
+		case 0: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 32, this.y - 32, 1); break;
+		case 1: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 36, this.y - 36, 0.4); break;
+		case 2: this.animation.drawFrame(this.game.clockTick, ctx, this.x - 36, this.y - 64, 0.4); break;
 		default: console.log("spell");
 	}
     Entity.prototype.draw.call(this);
