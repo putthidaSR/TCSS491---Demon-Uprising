@@ -204,6 +204,7 @@ AM.queueDownload("./img/coin.png");
 AM.queueDownload("./img/heart.png");
 AM.queueDownload("./img/tileSheet.jpg");
 AM.queueDownload("./img/Game_Over.png");
+AM.queueDownload("./img/winwave.png");
 
 //agents
 AM.queueDownload("./img/magician.png");
@@ -226,7 +227,9 @@ AM.queueDownload("./img/human9right.png");
 AM.queueDownload("./img/tower1.png");
 AM.queueDownload("./img/tower2.png");
 AM.queueDownload("./img/tower3.png");
-AM.queueDownload("./img/arrow1.png");
+AM.queueDownload("./img/fireball_0.png");
+AM.queueDownload("./img/fireball_1.png");
+
 
 //tree
 AM.queueDownload("./img/tree1.png");
