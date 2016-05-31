@@ -39,7 +39,8 @@ Spell.prototype.update = function () {
             break;
         }
         //check the target
-        if(!this.hit && ent instanceof Magician2) {
+        if(!this.hit && (ent instanceof Magician2 || ent instanceof Human1 || ent instanceof Human6
+        		|| ent instanceof Human9)) {
             //check to see if it is within range 
             if(this.collideRect(ent)) {
             	ent.health -= this.damage;
