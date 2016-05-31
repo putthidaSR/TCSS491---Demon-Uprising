@@ -1,5 +1,7 @@
 var AM = new AssetManager();
 var gameEngine = new GameEngine();
+var CANVAS_WIDTH = 1000;
+var CANVAS_HEIGHT = 700;
 
 //The varibable for all the map
 var MAP = {
@@ -93,7 +95,7 @@ var MAP = {
 "          ddddd          ddd      ",
 "          ddddd          ddd      ",
 "          ddddd          ddd      ",
-"          dddddlllllllllllldllllls",
+"          dddddlllllllllllllllllls",
 "          dddddlllllllllllllllllls",
 "          dddddlllllllllllllllllls",
 "          ddddd                   ",
@@ -143,18 +145,20 @@ var BOARD_CONSTANT = {
     TOWER_COST: [0, 25, 50 ,75],
     //range of the tower
     TOWER_RANGE: [0, 100, 150 ,200],
+    //firerate of the tower
+    TOWER_FPS: [0, 50, 150 ,250],
     //tower type selector.
     CURRENTTOWER: 0,
     //current spell
     CURRENTSPELL: 0,
+    //spell activated
+    SPELL_ACTIVATED: false,
     //User's health
     HEALTH: 10,
     //current level
     LEVEL: 1,
     //gameover?
     GAME_OVER: false,
-    //current map
-    //CURRENT_MAP: MAP.FIRSTMAP,
     //when magician died
     FINISH: false,
 };
@@ -168,12 +172,18 @@ var BOARD_CONSTANT = {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
-function changeTower(n) {
+ /*
+  * A function to detemine which tower the user had selected.
+  */
+ function changeTower(n) {
 	BOARD_CONSTANT.CURRENTTOWER = n;
     BOARD_CONSTANT.CURRENTSPELL = 0;
 }
 
-function changeSpell(n) {
+ /*
+  * A function to detemine which spell the user had selected.
+  */
+ function changeSpell(n) {
 	BOARD_CONSTANT.CURRENTSPELL = n;
     BOARD_CONSTANT.CURRENTTOWER = 0;
 }
@@ -183,9 +193,8 @@ function changeSpell(n) {
  */
 //attack
 AM.queueDownload("./img/explosion_transparent.png");
-//AM.queueDownload("./img/explosion.png");
-//AM.queueDownload("./img/snowball.png");
-//AM.queueDownload("./img/light.png");
+AM.queueDownload("./img/snowball.png");
+AM.queueDownload("./img/light.png");
 
 //other
 AM.queueDownload("./img/titleScreen1.jpg");
@@ -228,12 +237,8 @@ AM.queueDownload("./img/tree2.png");
     
     gameEngine.addEntity(new Background(gameEngine));
 	gameEngine.addEntity(new GameBoard(gameEngine));   
-    //gameEngine.addEntity(new Spell(gameEngine, AM.getAsset("./img/fireball_0.png")));
     gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
 
 	console.log("All Done!");
 });
-
-var CANVAS_WIDTH = 1000;
-var CANVAS_HEIGHT = 700;
 
