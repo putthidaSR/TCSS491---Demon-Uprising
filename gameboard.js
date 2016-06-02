@@ -273,6 +273,9 @@ GameBoard.prototype.createWave4 = function() {
 		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
     			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
     			AM.getAsset("./img/human9right.png")));
+    		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+    			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
+    			AM.getAsset("./img/human10right.png")));
 	}
     console.log("Wave 4");
 }
@@ -287,6 +290,9 @@ GameBoard.prototype.createWave5 = function() {
 		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
     			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
     			AM.getAsset("./img/human9right.png")));
+    		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+    			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
+    			AM.getAsset("./img/human10right.png")));
 	}
     console.log("Wave 5");
 }
