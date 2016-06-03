@@ -231,6 +231,9 @@ GameBoard.prototype.createWave1 = function() {
 		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
    			AM.getAsset("./img/human6walkright.png")));
+		this.humanList.push(new Human14(this.game, this, AM.getAsset("./img/Human14back.png"), 
+    			AM.getAsset("./img/Human14front.png"), AM.getAsset("./img/Human14left.png"),
+    			AM.getAsset("./img/Human14right.png")));
 	}
     console.log("Wave 1");
 }
@@ -244,6 +247,9 @@ GameBoard.prototype.createWave2 = function() {
 		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
     			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
     			AM.getAsset("./img/human6walkright.png")));
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));
 	}
     console.log("Wave 2");
 }
@@ -257,6 +263,9 @@ GameBoard.prototype.createWave3 = function() {
 		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
     			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
     			AM.getAsset("./img/human6walkright.png")));
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+    			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
+    			AM.getAsset("./img/human11right.png")));
 	}
     console.log("Wave 3");
 }
@@ -273,7 +282,7 @@ GameBoard.prototype.createWave4 = function() {
 		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
     			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
     			AM.getAsset("./img/human9right.png")));
-    		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
     			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
     			AM.getAsset("./img/human10right.png")));
 	}
@@ -290,7 +299,7 @@ GameBoard.prototype.createWave5 = function() {
 		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
     			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
     			AM.getAsset("./img/human9right.png")));
-    		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
     			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
     			AM.getAsset("./img/human10right.png")));
 	}
