@@ -228,6 +228,21 @@ AM.queueDownload("./img/human10front.png");
 AM.queueDownload("./img/human10left.png");
 AM.queueDownload("./img/human10right.png");
 
+AM.queueDownload("./img/human11back.png");
+AM.queueDownload("./img/human11front.png");
+AM.queueDownload("./img/human11left.png");
+AM.queueDownload("./img/human11right.png");
+
+AM.queueDownload("./img/human12back.png");
+AM.queueDownload("./img/human12front.png");
+AM.queueDownload("./img/human12left.png");
+AM.queueDownload("./img/human12right.png");
+
+AM.queueDownload("./img/Human14back.png");
+AM.queueDownload("./img/Human14front.png");
+AM.queueDownload("./img/Human14left.png");
+AM.queueDownload("./img/Human14right.png");
+
 //tower
 AM.queueDownload("./img/tower1.png");
 AM.queueDownload("./img/tower2.png");
