@@ -13,10 +13,16 @@ function Background(game) {
     		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
     		GAME_CONSTANT.BLOCK_LOOP)
     
-    this.tree = new Animation(AM.getAsset("./img/tree1.png"),GAME_CONSTANT.BLOCK_TREE_X, 
+    this.treeA = new Animation(AM.getAsset("./img/tree1.png"),GAME_CONSTANT.BLOCK_TREE_X, 
     		GAME_CONSTANT.BLOCK_TREE_Y, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
     		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
     		GAME_CONSTANT.BLOCK_LOOP)
+    
+    this.treeB = new Animation(AM.getAsset("./img/tree1.png"),GAME_CONSTANT.BLOCK_TREE_X, 
+    		GAME_CONSTANT.BLOCK_TREE_Y, GAME_CONSTANT.BLOCK_SIZE, GAME_CONSTANT.BLOCK_SIZE, 
+    		GAME_CONSTANT.BLOCK_SHEETWIDTH, GAME_CONSTANT.BLOCK_FRAMEDURATION, GAME_CONSTANT.BLOCK_FRAMES, 
+    		GAME_CONSTANT.BLOCK_LOOP)
+    
 };
 
 Background.prototype = new Entity();
@@ -40,6 +46,7 @@ Background.prototype.draw = function (ctx) {
 	        			this.x + col * GAME_CONSTANT.BLOCK_SIZE, 
 	        			this.y + row * GAME_CONSTANT.BLOCK_SIZE);
 	        }
+	        
 	    }
 	}
 	Entity.prototype.draw.call(this);

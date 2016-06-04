@@ -18,36 +18,21 @@ canvas {
 }
 
 body { 
-
-width: 560px; 
-
-height: 400px; 
-
-background-image: url('img/movingbg.jpg');
-
-background-position: 0px 0px;
-
-background-repeat: repeat-x;
-
-
-
-
+	width: 560px; 
+	height: 400px; 
+	background-image: url('img/movingbg.jpg');
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
 }
 
 .bodymenuscreen {
-width: 560px; 
+	width: 560px; 
+	height: 400px; 
+	background-image: url('img/movingbg.jpg');
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
 
-height: 400px; 
-
-background-image: url('img/movingbg.jpg');
-
-background-position: 0px 0px;
-
-background-repeat: repeat-x;
-
-
-
-animation: animatedBackground 40s linear infinite;
+	animation: animatedBackground 40s linear infinite;
 }
 
 .endScreen {
@@ -60,7 +45,36 @@ animation: animatedBackground 40s linear infinite;
         margin-top: -50px; /*half the image height*/
    
  }
- 
+
+.title {
+	position: absolute;
+    top: 20px;
+    left: 100px;
+}
+.C1 {
+    position: absolute;
+    top: 250px;
+    left: 100px;
+}
+
+.C2 {
+    position: absolute;
+    top: 250px;
+    right: 260px;
+}
+
+.C3 {
+    position: absolute;
+    top: 450px;
+    left: 300px;
+}
+
+.C4 {
+    position: absolute;
+    top: 500px;
+    right: 60px;
+}
+
 .boxed {
   border: 1px solid green ;
   width: 150px;
@@ -203,8 +217,6 @@ div.fixed1 {
 }
 
 
-
-/*TILT*/
 .tilt {
   -webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
