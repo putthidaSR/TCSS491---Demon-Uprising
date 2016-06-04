@@ -48,7 +48,7 @@ body {
 
 .title {
 	position: absolute;
-    top: 20px;
+    top: 10px;
     left: 100px;
 }
 .C1 {
@@ -81,6 +81,11 @@ body {
   color: white;
 }
 
+.tutorial {
+	position: absolute;
+    top: 120px;
+    left: 60px;
+}
 
 div.fixed1 {
     position: fixed;
