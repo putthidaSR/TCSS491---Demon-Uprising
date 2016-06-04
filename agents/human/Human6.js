@@ -33,10 +33,11 @@ function Human6(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesh
     }
     this.x = this.xPosition;
     this.y = this.yPosition;
-    this.health = 15 * BOARD_CONSTANT.LEVEL;
-	this.maxHealth = 15 * BOARD_CONSTANT.LEVEL;
+    this.health = 15 * BOARD_CONSTANT.LEVEL * 2;
+	this.maxHealth = 15 * BOARD_CONSTANT.LEVEL * 2;
 	this.size = 32;
     this.isALive = true;
+    this.speed = 1;
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
 
@@ -51,15 +52,15 @@ Human6.prototype.update = function () {
 	}
 	//movement
 	switch(this.nextMove.nextDir) {
-	case "u": this.y -= 0.25; break;
-	case "d": this.y += 0.25; break;
-	case "l": this.x -= 0.25; break;
-	case "r": this.x += 0.25; break;
+	case "u": this.y -= 0.25 * this.speed; break;
+	case "d": this.y += 0.25 * this.speed; break;
+	case "l": this.x -= 0.25 * this.speed; break;
+	case "r": this.x += 0.25 * this.speed; break;
 	case "a": break;
 	case "e": this.end(); break;
 	default: console.log(this.nextMove.nextDir);
 }
-	this.clocktick += 0.25;
+	this.clocktick += 0.25 * this.speed;
     Entity.prototype.update.call(this);
 }
 

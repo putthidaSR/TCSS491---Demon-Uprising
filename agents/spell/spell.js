@@ -43,7 +43,13 @@ Spell.prototype.update = function () {
         		|| ent instanceof Human9)) {
             //check to see if it is within range 
             if(this.collideRect(ent)) {
-            	ent.health -= this.damage;
+                 switch(this.id) {
+	        		case 0: ent.health -= this.damage; break;
+	        		case 1: ent.speed = 0.5; break;
+	        		case 2: ent.health -= this.damage * 3; ent.speed = 2; break;
+	        		default: console.log("spell damage");
+            	}
+            	
             	if(ent.health <= 0) {
             		ent.isAlive = false;
             		this.game.entities[i].removeFromWorld = true;

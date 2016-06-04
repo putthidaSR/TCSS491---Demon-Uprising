@@ -225,7 +225,7 @@ GameBoard.prototype.towerAllowed = function(x,y) {
 }
 
 GameBoard.prototype.createWave1 = function() {
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 0; i++) {
 		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
     			AM.getAsset("./img/human1right.png")));
 		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
@@ -236,7 +236,7 @@ GameBoard.prototype.createWave1 = function() {
 }
 
 GameBoard.prototype.createWave2 = function() {
-	for (var i = 0; i < 15; i++) {
+	for (var i = 0; i < 0; i++) {
 //        this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
 //			AM.getAsset("./img/magician2.png")));
 		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
@@ -249,7 +249,7 @@ GameBoard.prototype.createWave2 = function() {
 }
 
 GameBoard.prototype.createWave3 = function() {
-	for (var i = 0; i < 20; i++) {
+	for (var i = 0; i < 0; i++) {
 //		this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
 //			AM.getAsset("./img/magician2.png")));
 		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
@@ -262,7 +262,7 @@ GameBoard.prototype.createWave3 = function() {
 }
 
 GameBoard.prototype.createWave4 = function() {
-	for (var i = 0; i < 25; i++) {
+	for (var i = 0; i < 0; i++) {
 //		this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
 //			AM.getAsset("./img/magician2.png")));
 		this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 

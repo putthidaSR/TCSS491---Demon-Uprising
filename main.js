@@ -142,11 +142,13 @@ var BOARD_CONSTANT = {
     //current money
     MONEY: 100,
     //cost of the tower
-    TOWER_COST: [0, 25, 50 ,75],
+    TOWER_COST: [0, 50, 100 ,150],
     //range of the tower
     TOWER_RANGE: [0, 100, 150 ,200],
     //firerate of the tower
     TOWER_FPS: [0, 50, 150 ,250],
+    //tower damage
+    TOWER_DAMAGE: [0, 2, 5, 10],
     //tower type selector.
     CURRENTTOWER: 0,
     //current spell
@@ -251,8 +253,9 @@ AM.queueDownload("./img/tree2.png");
 	gameEngine.start();
     
     gameEngine.addEntity(new Background(gameEngine));
-	gameEngine.addEntity(new GameBoard(gameEngine));   
     gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
+	gameEngine.addEntity(new GameBoard(gameEngine));   
+    
 
 	console.log("All Done!");
 });
