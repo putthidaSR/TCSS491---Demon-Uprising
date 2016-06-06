@@ -215,15 +215,41 @@ AM.queueDownload("./img/magician2.png");
 AM.queueDownload("./img/human1left.png");
 AM.queueDownload("./img/human1right.png");
 
+//Human 6
 AM.queueDownload("./img/human6walkback.png");
 AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
 AM.queueDownload("./img/human6walkright.png");
 
+//Human 9
 AM.queueDownload("./img/human9back.png");
 AM.queueDownload("./img/human9front.png");
 AM.queueDownload("./img/human9left.png");
 AM.queueDownload("./img/human9right.png");
+
+//Human 10
+AM.queueDownload("./img/human10back.png");
+AM.queueDownload("./img/human10front.png");
+AM.queueDownload("./img/human10left.png");
+AM.queueDownload("./img/human10right.png");
+
+//Human 11
+AM.queueDownload("./img/human11back.png");
+AM.queueDownload("./img/human11front.png");
+AM.queueDownload("./img/human11left.png");
+AM.queueDownload("./img/human11right.png");
+
+//Human 12
+AM.queueDownload("./img/human12back.png");
+AM.queueDownload("./img/human12front.png");
+AM.queueDownload("./img/human12left.png");
+AM.queueDownload("./img/human12right.png");
+
+//Human 14
+AM.queueDownload("./img/human14back.png");
+AM.queueDownload("./img/human14front.png");
+AM.queueDownload("./img/human14left.png");
+AM.queueDownload("./img/human14right.png");
 
 //tower
 AM.queueDownload("./img/tower1.png");
