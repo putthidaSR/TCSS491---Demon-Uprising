@@ -33,8 +33,8 @@ function Human1(game, board, spritesheetWalkLeft, spritesheetWalkRight) {
     }
     this.x = this.xPosition;
     this.y = this.yPosition;
-    this.health = 5 * BOARD_CONSTANT.LEVEL;
-	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL;
+    this.health = 5 * BOARD_CONSTANT.LEVEL * 2;
+	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL * 2;
     this.size = 32;
     this.isALive = true;
     this.speed = 1;

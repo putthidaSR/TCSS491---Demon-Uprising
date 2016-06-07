@@ -40,10 +40,12 @@ Spell.prototype.update = function () {
         }
         //check the target
         if(!this.hit && (ent instanceof Magician2 || ent instanceof Human1 || ent instanceof Human6
-        		|| ent instanceof Human9)) {
+        		|| ent instanceof Human9 || ent instanceof Human10 || ent instanceof Human11
+        		|| ent instanceof Human12 || ent instanceof Human14)) {
             //check to see if it is within range 
             if(this.collideRect(ent)) {
-            	switch(this.id) {
+
+                 switch(this.id) {
 	        		case 0: ent.health -= this.damage; break;
 	        		case 1: ent.speed = 0.5; break;
 	        		case 2: ent.health -= this.damage * 3; ent.speed = 2; break;

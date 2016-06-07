@@ -142,11 +142,13 @@ var BOARD_CONSTANT = {
     //current money
     MONEY: 100,
     //cost of the tower
-    TOWER_COST: [0, 25, 50 ,75],
+    TOWER_COST: [0, 50, 100 ,150],
     //range of the tower
     TOWER_RANGE: [0, 100, 150 ,200],
     //firerate of the tower
     TOWER_FPS: [0, 50, 150 ,250],
+    //tower damage
+    TOWER_DAMAGE: [0, 2, 5, 10],
     //tower type selector.
     CURRENTTOWER: 0,
     //current spell
@@ -213,20 +215,41 @@ AM.queueDownload("./img/magician2.png");
 AM.queueDownload("./img/human1left.png");
 AM.queueDownload("./img/human1right.png");
 
+//Human 6
 AM.queueDownload("./img/human6walkback.png");
 AM.queueDownload("./img/human6walkfront.png");
 AM.queueDownload("./img/human6walkleft.png");
 AM.queueDownload("./img/human6walkright.png");
 
+//Human 9
 AM.queueDownload("./img/human9back.png");
 AM.queueDownload("./img/human9front.png");
 AM.queueDownload("./img/human9left.png");
 AM.queueDownload("./img/human9right.png");
 
+//Human 10
 AM.queueDownload("./img/human10back.png");
 AM.queueDownload("./img/human10front.png");
 AM.queueDownload("./img/human10left.png");
 AM.queueDownload("./img/human10right.png");
+
+//Human 11
+AM.queueDownload("./img/human11back.png");
+AM.queueDownload("./img/human11front.png");
+AM.queueDownload("./img/human11left.png");
+AM.queueDownload("./img/human11right.png");
+
+//Human 12
+AM.queueDownload("./img/human12back.png");
+AM.queueDownload("./img/human12front.png");
+AM.queueDownload("./img/human12left.png");
+AM.queueDownload("./img/human12right.png");
+
+//Human 14
+AM.queueDownload("./img/human14back.png");
+AM.queueDownload("./img/human14front.png");
+AM.queueDownload("./img/human14left.png");
+AM.queueDownload("./img/human14right.png");
 
 //tower
 AM.queueDownload("./img/tower1.png");
@@ -256,8 +279,9 @@ AM.queueDownload("./img/tree2.png");
 	gameEngine.start();
     
     gameEngine.addEntity(new Background(gameEngine));
-	gameEngine.addEntity(new GameBoard(gameEngine));   
     gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
+	gameEngine.addEntity(new GameBoard(gameEngine));   
+    
 
 	console.log("All Done!");
 });

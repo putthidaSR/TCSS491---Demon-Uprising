@@ -1,16 +1,16 @@
-//Human9
-function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight) {
+//Human14
+function Human14(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesheetWalkLeft, spritesheetWalkRight) {
 	//walk back
-	this.animationBack = new Animation(spritesheetWalkBack, 0, 0, 125, 78, 5, 0.15, 5, true);
+	this.animationBack = new Animation(spritesheetWalkBack, 0, 0, 25, 30, 3, 0.1, 3, true);
 
 	//walk front
-	this.animationFront = new Animation(spritesheetWalkFront, 0, 0, 80, 75, 5, 0.15, 5, true);
+	this.animationFront = new Animation(spritesheetWalkFront, 0, 0, 25, 30, 3, 0.1, 3, true);
 
 	//walk left
-	this.animationLeft = new Animation(spritesheetWalkLeft, 0, 0, 80, 75, 5, 0.15, 5, true);
+	this.animationLeft = new Animation(spritesheetWalkLeft, 0, 0, 25, 30, 3, 0.1, 3, true);
 
 	//walk right
-	this.animationRight = new Animation(spritesheetWalkRight, 0, 0, 80, 75, 5, 0.15, 5, true);
+	this.animationRight = new Animation(spritesheetWalkRight, 0, 0, 25, 30, 3, 0.1, 3, true);
   
     this.up = false;
     this.down = false;
@@ -28,7 +28,7 @@ function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesh
         this.xPosition = this.nextMove.x - 42;
         this.yPosition = this.nextMove.y - 30;
     } else {
-    	this.xPosition = this.nextMove.x - 20;
+    	this.xPosition = this.nextMove.x;
         this.yPosition = this.nextMove.y;
     }
     //how big the size of this entity is for collision with bullet
@@ -37,17 +37,17 @@ function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesh
 	this.x = this.xPosition;
 	this.y = this.yPosition;
 	//health of the magician 
-	this.health = 5 * BOARD_CONSTANT.LEVEL * 2;
-	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL * 2;
+	this.health = 5 * BOARD_CONSTANT.LEVEL;
+	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL;
     this.isALive = true;
     this.speed = 1;
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
 }
 
-Human9.prototype = new Entity();
-Human9.prototype.constructor = Human9;
+Human14.prototype = new Entity();
+Human14.prototype.constructor = Human14;
 
-Human9.prototype.update = function () {
+Human14.prototype.update = function () {
 	if(this.clocktick >= GAME_CONSTANT.BLOCK_SIZE) {
 		this.clocktick = 0;
 		this.nextMove = this.board.getNextStep(this.nextMove.x, this.nextMove.y, this.nextMove.nextDir);
@@ -67,7 +67,7 @@ Human9.prototype.update = function () {
     Entity.prototype.update.call(this);
 }
 
-Human9.prototype.end = function() {
+Human14.prototype.end = function() {
 	this.isALive = false;
 	for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
@@ -84,7 +84,7 @@ Human9.prototype.end = function() {
 }
 
 //a helper method for update on which dirction it should face.
-Human9.prototype.change = function(dir) {
+Human14.prototype.change = function(dir) {
 	switch(dir) {
 		case "u": this.up = true; this.down = false; this.left = false; 
 			this.right = false; this.space = false; break;
@@ -101,7 +101,7 @@ Human9.prototype.change = function(dir) {
 	this.move = true;
 }
 
-Human9.prototype.draw = function (ctx) {
+Human14.prototype.draw = function (ctx) {
 	//console.log(this.up);
 	if(this.isALive) {
 		//health
@@ -118,17 +118,17 @@ Human9.prototype.draw = function (ctx) {
 		ctx.fill();
 		
 		if (this.up) {
-	        this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	        this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    } else if(this.down) {
-	    	this.animationFront.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	    	this.animationFront.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    } else if(this.left) {
-	    	this.animationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	    	this.animationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    } else if(this.right) {
-	    	this.animationRight.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	    	this.animationRight.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    } else if(this.space) {
-	    	this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	    	this.animationBack.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    } else {
-	        this.animationFront.drawFrame(this.game.clockTick, ctx, this.x, this.y, 0.8);
+	        this.animationFront.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.3);
 	    }
 	}
     Entity.prototype.draw.call(this);
