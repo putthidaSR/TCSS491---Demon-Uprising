@@ -1,8 +1,16 @@
 //constant for the game picture
 var GAME_CONSTANT = {
     BLOCK_SIZE : 30,
-    BLOCK_GRASS_X : 185,
-    BLOCK_GRASS_Y : 370,
+    BLOCK_GRASS_X : 0,//185,
+    BLOCK_GRASS_Y : 0,//370,
+    BLOCK_TALLGRASS_X : 65,//185,
+    BLOCK_TALLGRASS_Y : 95,//370,
+    BLOCK_DARKGRASS_X : 0,//185,
+    BLOCK_DARKGRASS_Y : 190,//370,
+    BLOCK_FLOWER_X : 0,//185,
+    BLOCK_FLOWER_Y : 95,//370,
+    BLOCK_FIRE_X : 0,//185,
+    BLOCK_FIRE_Y : 285,//370,
     BLOCK_ROAD_X : 0,
     BLOCK_ROAD_Y : 92,
     BLOCK_SHEETWIDTH : 1,
@@ -36,6 +44,9 @@ GameBoard.prototype.constructor = GameBoard;
 GameBoard.prototype.update = function () {
     Entity.prototype.update.call(this);
     this.clockTick++;
+    if(BOARD_CONSTANT.HEALTH <= 0) {
+    	this.game.addEntity(new GameOver(this.game, AM.getAsset("./img/Game_Over.png")));
+    }
     //adding tower
     if(this.game.click) {
     	var xPos = Math.floor(this.game.position.x / GAME_CONSTANT.BLOCK_SIZE);
@@ -73,8 +84,8 @@ GameBoard.prototype.update = function () {
     var check = true;
     for(var i =0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
-        if(ent instanceof Magician2 || ent instanceof Human1 || ent instanceof Human6
-        		|| ent instanceof Human9) {
+        if(ent instanceof Human10 || ent instanceof Human11 || ent instanceof Human6
+        		|| ent instanceof Human9 || ent instanceof Human12 || ent instanceof Human14) {
             check = false;
         }
     }
@@ -229,92 +240,126 @@ GameBoard.prototype.createWave1 = function() {
 		// this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
     	// 		AM.getAsset("./img/human1right.png")));
         
-		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-   			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-   			AM.getAsset("./img/human6walkright.png")));
-               
-		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
-    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
-    			AM.getAsset("./img/human9right.png")));
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));
 	}
     console.log("Wave 1");
 }
 
 GameBoard.prototype.createWave2 = function() {
-	for (var i = 0; i < 15; i++) {
-//        this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
-//			AM.getAsset("./img/magician2.png")));
-		// this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
-    	// 		AM.getAsset("./img/human1right.png")));
-        
-		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-    			AM.getAsset("./img/human6walkright.png")));
+	for (var i = 0; i < 5; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));
                 
-		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
-    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
-    			AM.getAsset("./img/human9right.png")));
-                
-        this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
-    			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
-    			AM.getAsset("./img/human10right.png")));
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+    			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
+    			AM.getAsset("./img/human11right.png")));
+	}
+    for (var i = 0; i < 5; i++) {                        
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+    			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
+    			AM.getAsset("./img/human11right.png")));
+	}
+    for (var i = 0; i < 5; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));            
 	}
     console.log("Wave 2");
 }
 
 GameBoard.prototype.createWave3 = function() {
-	for (var i = 0; i < 20; i++) {
-//		this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
-//			AM.getAsset("./img/magician2.png")));
-		// this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
-    	// 		AM.getAsset("./img/human1right.png")));
-        
-		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-    			AM.getAsset("./img/human6walkright.png")));
+	for (var i = 0; i < 10; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));
                 
-		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
-    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
-    			AM.getAsset("./img/human9right.png")));
-                
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+    			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
+    			AM.getAsset("./img/human11right.png")));
         this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
     			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
     			AM.getAsset("./img/human10right.png")));
-                
-        this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+        this.humanList.push(new Human14(this.game, this, AM.getAsset("./img/human14back.png"), 
+                AM.getAsset("./img/human14front.png"), AM.getAsset("./img/human14left.png"),
+                AM.getAsset("./img/human14right.png")));
+	}
+    for (var i = 0; i < 10; i++) {                        
+		 this.humanList.push(new Human14(this.game, this, AM.getAsset("./img/human14back.png"), 
+    			AM.getAsset("./img/human14front.png"), AM.getAsset("./img/human14left.png"),
+    			AM.getAsset("./img/human14right.png")));
+	}
+    for (var i = 0; i < 10; i++) {                        
+		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+    			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
+    			AM.getAsset("./img/human10right.png")));
+	}
+    for (var i = 0; i < 10; i++) {                        
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
     			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
     			AM.getAsset("./img/human11right.png")));
-                
+	}
+    for (var i = 0; i < 10; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));            
 	}
     console.log("Wave 3");
 }
 
 GameBoard.prototype.createWave4 = function() {
-	for (var i = 0; i < 30; i++) {
-//		this.humanList.push(new Magician2(this.game, this, AM.getAsset("./img/magician.png"), 
-//			AM.getAsset("./img/magician2.png")));
-		// this.humanList.push(new Human1(this.game, this, AM.getAsset("./img/human1left.png"), 
-    	// 		AM.getAsset("./img/human1right.png")));
-        
-		this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
-    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
-    			AM.getAsset("./img/human6walkright.png")));
+	for (var i = 0; i < 10; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+    			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
+    			AM.getAsset("./img/human12right.png")));
                 
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+    			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
+    			AM.getAsset("./img/human11right.png")));
+        this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+    			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
+    			AM.getAsset("./img/human10right.png")));
+        this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
+    			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
+    			AM.getAsset("./img/human9right.png")));
+        this.humanList.push(new Human14(this.game, this, AM.getAsset("./img/human14back.png"), 
+                AM.getAsset("./img/human14front.png"), AM.getAsset("./img/human14left.png"),
+                AM.getAsset("./img/human14right.png")));
+        this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
+                AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
+                AM.getAsset("./img/human6walkright.png"))); 
+	}
+    for (var i = 0; i < 10; i++) {                        
+		 this.humanList.push(new Human6(this.game, this, AM.getAsset("./img/human6walkback.png"), 
+    			AM.getAsset("./img/human6walkfront.png"), AM.getAsset("./img/human6walkleft.png"),
+    			AM.getAsset("./img/human6walkright.png"))); 
+	}
+    for (var i = 0; i < 10; i++) {                        
+		 this.humanList.push(new Human14(this.game, this, AM.getAsset("./img/human14back.png"), 
+    			AM.getAsset("./img/human14front.png"), AM.getAsset("./img/human14left.png"),
+    			AM.getAsset("./img/human14right.png")));
+	}
+    for (var i = 0; i < 10; i++) {                        
 		this.humanList.push(new Human9(this.game, this, AM.getAsset("./img/human9back.png"), 
     			AM.getAsset("./img/human9front.png"), AM.getAsset("./img/human9left.png"),
     			AM.getAsset("./img/human9right.png")));
-                
-    	this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
+	}
+    for (var i = 0; i < 10; i++) {                        
+		this.humanList.push(new Human10(this.game, this, AM.getAsset("./img/human10back.png"), 
     			AM.getAsset("./img/human10front.png"), AM.getAsset("./img/human10left.png"),
     			AM.getAsset("./img/human10right.png")));
-                
-         this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
+	}
+    for (var i = 0; i < 10; i++) {                        
+		this.humanList.push(new Human11(this.game, this, AM.getAsset("./img/human11back.png"), 
     			AM.getAsset("./img/human11front.png"), AM.getAsset("./img/human11left.png"),
     			AM.getAsset("./img/human11right.png")));
-                               
-        this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
+	}
+    for (var i = 0; i < 10; i++) {        
+		this.humanList.push(new Human12(this.game, this, AM.getAsset("./img/human12back.png"), 
     			AM.getAsset("./img/human12front.png"), AM.getAsset("./img/human12left.png"),
-    			AM.getAsset("./img/human12right.png")));
+    			AM.getAsset("./img/human12right.png")));            
 	}
     console.log("Wave 4");
 }

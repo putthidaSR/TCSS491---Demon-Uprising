@@ -55,8 +55,8 @@ Bullet.prototype.update = function () {
 Bullet.prototype.move = function() {
 	//find unit vector
 	//"+rectWidth/2" because we want bullet to go for center of enemy no top left corner
-	var xDist = this.target.x + this.target.size - this.x; 
-	var yDist = this.target.y + this.target.size - this.y;
+	var xDist = this.target.x + this.target.size/2 - this.x; 
+	var yDist = this.target.y + this.target.size/2 - this.y;
 	var dist = Math.sqrt(xDist*xDist+yDist*yDist);
 	this.x = this.x+this.speed*xDist/dist;
 	this.y = this.y+this.speed*yDist/dist;
@@ -71,19 +71,19 @@ Bullet.prototype.draw = function(ctx) {
 		// ctx.fill();
         //this.buleetFire.drawFrame(this.game.clockTick, ctx,this.x - 16, this.y - 8, 0.15);
         switch(this.id) {
-            case 0: this.animation[0].drawFrame(this.game.clockTick, ctx,this.x - 16, this.y - 8, 0.15); break;
-            case 1: this.animation[1].drawFrame(this.game.clockTick, ctx,this.x - 16, this.y - 16, 0.1); break;
-            case 2: this.animation[2].drawFrame(this.game.clockTick, ctx,this.x - 16, this.y - 8, 0.2); break;
+            case 0: this.animation[0].drawFrame(this.game.clockTick, ctx,this.x, this.y - 8, 0.15); break;
+            case 1: this.animation[1].drawFrame(this.game.clockTick, ctx,this.x, this.y - 16, 0.1); break;
+            case 2: this.animation[2].drawFrame(this.game.clockTick, ctx,this.x, this.y - 8, 0.2); break;
         }
 	}
 };
 
 Bullet.prototype.checkCollision = function() {
-	var xDist = this.target.x + this.target.size - this.x; 
-	var yDist = this.target.y + this.target.size - this.y;
+	var xDist = this.target.x + this.target.size/2 - this.x; 
+	var yDist = this.target.y + this.target.size/2 - this.y;
 	var dist = Math.sqrt(xDist*xDist+yDist*yDist);
 	
-	if(dist < 20) {
+	if(dist < this.radius) {
 		return true;
 	}
 	return false;

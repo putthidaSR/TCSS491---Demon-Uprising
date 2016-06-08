@@ -22,14 +22,14 @@ function Human11(game, board, spritesheetWalkBack, spritesheetWalkFront, sprites
     this.nextMove = board.getStart();
     this.clocktick = 0;
     if(this.nextMove.x == 0) {
-        this.xPosition = this.nextMove.x + 16;
-        this.yPosition = this.nextMove.y - 30;
+        this.xPosition = this.nextMove.x + 28;
+        this.yPosition = this.nextMove.y - 16;
     } else if(this.nextMove.x == 990){
-        this.xPosition = this.nextMove.x - 42;
-        this.yPosition = this.nextMove.y - 30;
+        this.xPosition = this.nextMove.x - 28;
+        this.yPosition = this.nextMove.y - 12;
     } else {
     	this.xPosition = this.nextMove.x;
-        this.yPosition = this.nextMove.y;
+        this.yPosition = this.nextMove.y + 12;
     }
     //how big the size of this entity is for collision with bullet
 	this.size = 32;
@@ -108,12 +108,12 @@ Human11.prototype.draw = function (ctx) {
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 2;
 		ctx.beginPath();
-		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.rect(this.x, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
 		ctx.stroke();
 
 		ctx.beginPath();
 		ctx.fillStyle = "yellow";
-		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH * (this.health/this.maxHealth), 
+		ctx.rect(this.x, this.y, GAME_CONSTANT.HEALTH_WIDTH * (this.health/this.maxHealth), 
 				GAME_CONSTANT.HEALTH_HEIGHT);
 		ctx.fill();
 		

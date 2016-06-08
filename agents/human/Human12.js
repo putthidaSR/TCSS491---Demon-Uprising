@@ -22,14 +22,14 @@ function Human12(game, board, spritesheetWalkBack, spritesheetWalkFront, sprites
     this.nextMove = board.getStart();
     this.clocktick = 0;
     if(this.nextMove.x == 0) {
-        this.xPosition = this.nextMove.x + 16;
-        this.yPosition = this.nextMove.y - 30;
+        this.xPosition = this.nextMove.x + 24;
+        this.yPosition = this.nextMove.y - 26;
     } else if(this.nextMove.x == 990){
-        this.xPosition = this.nextMove.x - 42;
-        this.yPosition = this.nextMove.y - 30;
+        this.xPosition = this.nextMove.x - 36;
+        this.yPosition = this.nextMove.y - 24;
     } else {
     	this.xPosition = this.nextMove.x;
-        this.yPosition = this.nextMove.y;
+        this.yPosition = this.nextMove.y + 8;
     }
     //how big the size of this entity is for collision with bullet
 	this.size = 32;
@@ -37,8 +37,8 @@ function Human12(game, board, spritesheetWalkBack, spritesheetWalkFront, sprites
 	this.x = this.xPosition;
 	this.y = this.yPosition;
 	//health of the magician 
-	this.health = 5 * BOARD_CONSTANT.LEVEL;
-	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL;
+	this.health = 15 * BOARD_CONSTANT.LEVEL;
+	this.maxHealth = 15 * BOARD_CONSTANT.LEVEL;
     this.isALive = true;
     this.speed = 1;
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start
@@ -55,15 +55,15 @@ Human12.prototype.update = function () {
 	}
 	//movement
 	switch(this.nextMove.nextDir) {
-	case "u": this.y-= 1 * this.speed; break;
-	case "d": this.y+= 1 * this.speed; break;
-	case "l": this.x-= 1 * this.speed; break;
-	case "r": this.x+= 1 * this.speed; break;
+	case "u": this.y-= 0.5 * this.speed; break;
+	case "d": this.y+= 0.5 * this.speed; break;
+	case "l": this.x-= 0.5 * this.speed; break;
+	case "r": this.x+= 0.5 * this.speed; break;
 	case "a": break;
 	case "e": this.end(); break;
 	default: console.log(this.nextMove.nextDir);
 }
-	this.clocktick += 1 * this.speed;
+	this.clocktick += 0.5 * this.speed;
     Entity.prototype.update.call(this);
 }
 
@@ -108,12 +108,12 @@ Human12.prototype.draw = function (ctx) {
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 2;
 		ctx.beginPath();
-		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
+		ctx.rect(this.x + 5, this.y - 5, GAME_CONSTANT.HEALTH_WIDTH, GAME_CONSTANT.HEALTH_HEIGHT);
 		ctx.stroke();
 
 		ctx.beginPath();
 		ctx.fillStyle = "yellow";
-		ctx.rect(this.x+15, this.y, GAME_CONSTANT.HEALTH_WIDTH * (this.health/this.maxHealth), 
+		ctx.rect(this.x + 5, this.y - 5, GAME_CONSTANT.HEALTH_WIDTH * (this.health/this.maxHealth), 
 				GAME_CONSTANT.HEALTH_HEIGHT);
 		ctx.fill();
 		

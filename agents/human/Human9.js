@@ -37,8 +37,8 @@ function Human9(game, board, spritesheetWalkBack, spritesheetWalkFront, spritesh
 	this.x = this.xPosition;
 	this.y = this.yPosition;
 	//health of the magician 
-	this.health = 5 * BOARD_CONSTANT.LEVEL * 2;
-	this.maxHealth = 5 * BOARD_CONSTANT.LEVEL * 2;
+	this.health = 10 * BOARD_CONSTANT.LEVEL;
+	this.maxHealth = 10 * BOARD_CONSTANT.LEVEL;
     this.isALive = true;
     this.speed = 1;
     Entity.call(this, game, this.xPosition, this.yPosition);//position where it start

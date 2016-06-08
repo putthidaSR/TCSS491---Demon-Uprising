@@ -146,9 +146,9 @@ var BOARD_CONSTANT = {
     //range of the tower
     TOWER_RANGE: [0, 100, 150 ,200],
     //firerate of the tower
-    TOWER_FPS: [0, 50, 150 ,250],
+    TOWER_FPS: [0, 40, 80 ,150],
     //tower damage
-    TOWER_DAMAGE: [0, 2, 5, 10],
+    TOWER_DAMAGE: [0, 1, 3, 5],
     //tower type selector.
     CURRENTTOWER: 0,
     //current spell
@@ -205,6 +205,7 @@ AM.queueDownload("./img/health_bar.png");
 AM.queueDownload("./img/coin.png");
 AM.queueDownload("./img/heart.png");
 AM.queueDownload("./img/tileSheet.jpg");
+AM.queueDownload("./img/tileSheet1.png");
 AM.queueDownload("./img/Game_Over.png");
 AM.queueDownload("./img/winwave.png");
 
@@ -279,7 +280,7 @@ AM.queueDownload("./img/tree2.png");
 	gameEngine.start();
     
     gameEngine.addEntity(new Background(gameEngine));
-    gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
+    //gameEngine.addEntity(new GameOver(gameEngine, AM.getAsset("./img/Game_Over.png")));
 	gameEngine.addEntity(new GameBoard(gameEngine));   
     
 

@@ -10,7 +10,7 @@ function Spell(game, board, x, y, id) {
     this.game = game;
     this.x = x;
     this.y = y;
-    this.damage = 5;
+    this.damage = 10;
     this.animation = this.spell[this.id];
     //range of the spell
     this.radius = 50;
@@ -48,7 +48,7 @@ Spell.prototype.update = function () {
                  switch(this.id) {
 	        		case 0: ent.health -= this.damage; break;
 	        		case 1: ent.speed = 0.5; break;
-	        		case 2: ent.health -= this.damage * 3; ent.speed = 2; break;
+	        		case 2: ent.health -= this.damage * 2; ent.speed = 2; break;
 	        		default: console.log("spell damage");
             	}
             	

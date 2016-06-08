@@ -9,7 +9,7 @@ function Tower(game, board, x, y, id) {
 	              new Animation(AM.getAsset("./img/tower3.png"), 130, 50, 250, 420, 1, 0.15, 1, true)];
 	this.range = BOARD_CONSTANT.TOWER_RANGE[id] + 50;
 	//damage the tower can done
-	this.damage = BOARD_CONSTANT.TOWER_DAMAGE[this.id + 1];
+	this.damage = BOARD_CONSTANT.TOWER_DAMAGE[this.id + 1] * BOARD_CONSTANT.LEVEL;
 	this.animation = this.color[this.id];
 	//the current cool down of the bullet 
 	this.rateOfFire = 1000;
@@ -30,17 +30,33 @@ Tower.prototype.update = function () {
 }
 
 Tower.prototype.findTarget = function() {
+    var target;
+    var prvDist = 2000;
+    var mag;
+    var found = false;
 	//finding human target
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if( ent instanceof Human10 || ent instanceof Human6 || ent instanceof Human11
         		|| ent instanceof Human9 || ent instanceof Human12 || ent instanceof Human14) {
             //check to see if it is within range 
-            if (ent !== this && this.collideRect(ent)) {               
-                this.fire(ent);
+            if (ent !== this && this.collideRect(ent)) { 
+                if(target === null) {
+                    target = ent;
+                } else if(distance(mag, ent) < prvDist) {
+                    target = ent;
+                    prvDist = distance(mag, ent);
+                }      
+                found = true;
             }
-        }     
+        } else if(ent instanceof Magician) {
+            mag = ent;
+        } 
     }
+    if(found) {
+        this.fire(target);   
+    }
+    
 };
 
 Tower.prototype.draw = function (ctx) {
